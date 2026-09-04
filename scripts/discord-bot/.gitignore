@@ -1,0 +1,13 @@
+# Bot dependencies
+node_modules/
+
+# Real environment file (NEVER commit this!)
+.env
+
+# Railway/Render metadata
+.railway/
+.render/
+
+# Editor/OS junk
+.DS_Store
+*.log
