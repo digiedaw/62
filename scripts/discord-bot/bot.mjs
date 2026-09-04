@@ -163,6 +163,117 @@ function parseTemplate(content) {
   return { version, title, type, date, body };
 }
 
+// ── Forwarded-message parsing ──────────────────────────────────────────
+// Detects patch content inside an auto-forwarded Discord message.
+//
+// Returns: { detected, confidence, parsed } where confidence is
+//   'high' (definitely a patch), 'medium' (likely), 'low' (maybe).
+// Returns { detected: false } if the message doesn't look like a patch.
+//
+// Heuristics:
+//   - First line contains a version like "v3.5.2", "Patch 3.5.2", or "3.5.2"
+//   - Message has patch-related keywords: patch, hotfix, balance, update,
+//     buff, nerf, fix, change, notes, changelog, release
+//   - Forwarded from another server (msg.messageSnapshots / cross_post)
+const PATCH_KEYWORDS =
+  /\b(patch|hotfix|balance|update|buff|nerf|fix|change[s]?|notes|changelog|release|version|maintenance)\b/i;
+
+function parseForwarded(msg) {
+  // Pull content out of the original forwarded snapshot if present.
+  // Discord exposes this on `messageSnapshots` for cross-server forwards.
+  let original = msg.content || '';
+  let snapshotTitle = '';
+  let snapshotDescription = '';
+  let snapshotFields = [];
+
+  if (msg.messageSnapshots && msg.messageSnapshots.size > 0) {
+    const snap = msg.messageSnapshots.first();
+    const embeds = snap.embeds || [];
+    const e0 = embeds[0];
+    if (e0) {
+      snapshotTitle = e0.title || '';
+      snapshotDescription = e0.description || '';
+      snapshotFields = (e0.fields || []).map((f) => ({
+        name: f.name,
+        value: f.value,
+      }));
+    }
+    if (snap.content) original = snap.content;
+  }
+
+  // Concatenate everything for keyword scanning
+  const haystack = [
+    original,
+    snapshotTitle,
+    snapshotDescription,
+    snapshotFields.map((f) => `${f.name}: ${f.value}`).join('\n'),
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  // Score
+  let confidence = 'low';
+  const looksLikePatch = PATCH_KEYWORDS.test(haystack);
+
+  // Try to extract version from first line
+  const firstLine = (original || snapshotTitle).split('\n')[0].trim();
+  const versionMatch =
+    firstLine.match(/v?(\d+\.\d+(?:\.\d+)?)/) ||
+    firstLine.match(/patch\s*(\d+\.\d+(?:\.\d+)?)/i);
+  const version = versionMatch ? versionMatch[1] : '';
+
+  if (looksLikePatch && version) confidence = 'high';
+  else if (looksLikePatch) confidence = 'medium';
+  else if (version) confidence = 'medium';
+
+  if (!looksLikePatch && !version) {
+    return { detected: false };
+  }
+
+  // Build a sensible title
+  let title = snapshotTitle || firstLine || `Patch ${version}`;
+  // Strip leading emoji markers if any
+  title = title.replace(/^[\p{Emoji}\s]+/u, '').trim();
+  if (!title && version) title = `Patch ${version}`;
+
+  // Type detection
+  let type = 'Hotfix';
+  if (/major|big|big update/i.test(haystack)) type = 'Major';
+
+  // Body: prefer embed description, else original content
+  let body = snapshotDescription || original || '_No details provided._';
+
+  // Date: try to find one in the embed footer / timestamp
+  let date = new Date().toISOString().slice(0, 10);
+  const tsMatch =
+    snapshotTitle.match(/\b(20\d{2}[-/]\d{1,2}[-/]\d{1,2})\b/) ||
+    haystack.match(/\b(20\d{2}[-/]\d{1,2}[-/]\d{1,2})\b/) ||
+    haystack.match(
+      /\b(\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+20\d{2})\b/i
+    );
+  if (tsMatch) {
+    const d = Date.parse(tsMatch[1].replace(/-/g, '/'));
+    if (!Number.isNaN(d)) date = new Date(d).toISOString().slice(0, 10);
+  } else if (msg.createdTimestamp) {
+    date = new Date(msg.createdTimestamp).toISOString().slice(0, 10);
+  }
+
+  if (!version) {
+    return {
+      detected: true,
+      confidence,
+      parsed: null, // signal "needs manual fallback"
+      reason: 'Could not find a version number in the message.',
+    };
+  }
+
+  return {
+    detected: true,
+    confidence,
+    parsed: { version, title, type, date, body },
+  };
+}
+
 // ── Markdown writer ────────────────────────────────────────────────────
 function escapeYaml(s) {
   return String(s).replace(/"/g, '\\"').replace(/\n/g, ' ');
@@ -268,22 +379,102 @@ client.on(Events.MessageCreate, async (msg) => {
   // Permission gate: must have the editor role
   const hasRole = msg.member?.roles?.cache?.has(ALLOWED_ROLE_ID);
   if (!hasRole) {
-    return msg.reply('🚫 You need the **Wiki Editor** role to publish patches.');
+    return msg.reply(
+      '🚫 You need the **Wiki Editor** role to publish patches.'
+    );
   }
 
-  // Quick pre-check: must start with the 📌 template emoji
-  if (!msg.content.startsWith('📌')) return;
+  // ─── Decide which mode this message is in ─────────────────────────
+  let parsed = null;
+  let mode = 'unknown';
 
+  // Mode 1: Explicit 📌 template (you typed it manually)
+  if (msg.content.startsWith('📌')) {
+    mode = 'template';
+    try {
+      parsed = parseTemplate(msg.content);
+    } catch (err) {
+      return msg.reply(`❌ Template error: ${err.message}`);
+    }
+  }
+  // Mode 2: Forwarded message from another server (auto-forward)
+  else if (
+    msg.messageSnapshots?.size > 0 ||
+    msg.messageReference?.guildId
+  ) {
+    mode = 'forwarded';
+    const result = parseForwarded(msg);
+    if (!result.detected) return; // silently ignore non-patch forwards
+    if (!result.parsed) {
+      return msg.reply(
+        `🤔 Looks like a patch message but I couldn't extract a version.\n` +
+          `Tip: forward with a version like "**v3.5.2**" in the first line, ` +
+          `or reply to this message with a 📌 template.`
+      );
+    }
+    parsed = result.parsed;
+    // Only auto-publish on high confidence; otherwise ask for confirmation
+    if (result.confidence !== 'high') {
+      const confirm = await msg.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(0xf5a623)
+            .setTitle(`🤔 Possible patch detected — confirm?`)
+            .setDescription(
+              `Confidence: **${result.confidence}**\n` +
+                `React with ✅ to publish, ❌ to ignore.`
+            )
+            .addFields(
+              { name: 'Version', value: parsed.version, inline: true },
+              { name: 'Type', value: parsed.type, inline: true },
+              { name: 'Date', value: parsed.date, inline: true },
+              { name: 'Title', value: parsed.title, inline: false },
+              {
+                name: 'Body preview',
+                value: parsed.body.slice(0, 500) + (parsed.body.length > 500 ? '…' : ''),
+                inline: false,
+              }
+            )
+            .setTimestamp(),
+        ],
+      });
+      await confirm.react('✅');
+      await confirm.react('❌');
+      try {
+        const reaction = await confirm.awaitReactions({
+          filter: (r, u) =>
+            !u.bot && (r.emoji.name === '✅' || r.emoji.name === '❌'),
+          max: 1,
+          time: 5 * 60_000,
+          errors: ['time'],
+        });
+        const first = reaction.first();
+        if (!first || first.emoji.name === '❌') {
+          await confirm.edit({ content: '🚫 Cancelled.', embeds: [] });
+          return;
+        }
+      } catch {
+        await confirm.edit({ content: '⌛ Confirmation timed out.', embeds: [] });
+        return;
+      }
+    }
+  }
+  // Mode 3: nothing relevant — silently ignore
+  else {
+    return;
+  }
+
+  // ─── Publish ─────────────────────────────────────────────────────
   try {
-    const parsed = parseTemplate(msg.content);
     const filepath = writeMarkdown(parsed);
 
-    // Acknowledge quickly so the user isn't staring at "Bot is typing…"
     const status = await msg.reply({
       embeds: [
         new EmbedBuilder()
           .setColor(0xf5a623)
-          .setTitle(`⏳ Publishing patch ${parsed.version}…`)
+          .setTitle(
+            `⏳ Publishing patch ${parsed.version} (${mode} mode)…`
+          )
           .addFields(
             { name: 'Title', value: parsed.title, inline: false },
             { name: 'Type', value: parsed.type, inline: true },
@@ -293,13 +484,9 @@ client.on(Events.MessageCreate, async (msg) => {
       ],
     });
 
-    // 1. Push to GitHub
     await commitAndPush(parsed.version, filepath);
-
-    // 2. (Optional) trigger Vercel rebuild manually
     await triggerRebuild(parsed.version);
 
-    // 3. Edit the status message with success
     await status.edit({
       embeds: [
         new EmbedBuilder()

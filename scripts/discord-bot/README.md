@@ -22,7 +22,9 @@ Discord message  →  bot parses template
 (default: `./wiki-repo`) so it has the `src/content/patchnote/` tree to
 write into. All git commands run inside that folder.
 
-## Message template
+## Three ways to publish a patch
+
+### Mode 1 — Manual template (most reliable)
 
 Copy-paste this into your Discord channel and edit the values:
 
@@ -36,14 +38,26 @@ Rebalanced SK digimon damage by -8%.
 Fixed party invite bug.
 ```
 
-| Line | Meaning |
-|---|---|
-| `📌 [<version>] — <title>` | version becomes URL slug; title is shown on cards |
-| `🏷️ Major` or `🏷️ Hotfix` | drives the colored badge |
-| `📅 <date>` | any parseable date (e.g. `20 August 2026`, `2026-08-20`) |
-| `─────` | everything below becomes the Markdown body |
+### Mode 2 — Forward from another server (semi-auto)
 
-The bot will:
+Forward a patch message from any Discord server into your private
+channel. The bot auto-detects patch content by scanning for:
+
+- Version-like text (`v3.5.2`, `3.5.2`, `Patch 3.5.2`)
+- Keywords: `patch`, `hotfix`, `balance`, `update`, `buff`, `nerf`,
+  `fix`, `change`, `notes`, `changelog`, `release`, `maintenance`
+- An embed title (if the original message was an embed)
+
+If confident (`high`), it auto-publishes. If unsure (`medium`), it
+shows a preview embed and waits for a ✅ reaction.
+
+### Mode 3 — Reply-to-publish (workaround)
+
+If a message has no detectable version, **reply to it with a 📌
+template line** and the bot will use both sources.
+
+## What the bot will do
+
 1. Reply with a ⏳ "Publishing…" embed
 2. Write `src/content/patchnote/<slug>.md`
 3. `git add` + `git commit` + `git push` to GitHub
