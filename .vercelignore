@@ -1,0 +1,13 @@
+# Files / folders Vercel does NOT need to upload to the build container.
+# Smaller uploads → faster, more reliable builds.
+
+node_modules
+.git
+.astro
+._draft
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+README.md
