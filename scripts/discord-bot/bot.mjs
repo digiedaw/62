@@ -75,8 +75,30 @@ if (DEPLOY_HOOK) {
   );
 }
 
+// ── Repo workspace ─────────────────────────────────────────────────────
+// Railway only deploys the bot folder, NOT the whole wiki repo. So we
+// clone the wiki repo into a workspace folder at startup. All git
+// commands run inside this folder.
+const WORKSPACE = path.resolve(process.env.WORKSPACE_DIR || './wiki-repo');
+
+async function ensureRepo() {
+  if (fs.existsSync(path.join(WORKSPACE, '.git'))) {
+    console.log(`📂 Wiki repo already cloned at ${WORKSPACE}`);
+    return;
+  }
+
+  const authUrl = `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`;
+  console.log(`📥 Cloning ${GITHUB_REPO} into ${WORKSPACE}…`);
+  fs.mkdirSync(WORKSPACE, { recursive: true });
+  await exec('git', ['clone', '--depth', '50', authUrl, WORKSPACE], {
+    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+  });
+  console.log(`✅ Repo cloned`);
+}
+
 // ── Markdown file destination ──────────────────────────────────────────
-const CONTENT_DIR = process.env.PATCHNOTE_DIR || 'src/content/patchnote';
+// Relative to the cloned wiki repo.
+const CONTENT_DIR = path.join(WORKSPACE, process.env.PATCHNOTE_SUBDIR || 'src/content/patchnote');
 
 // ── Template parsing ───────────────────────────────────────────────────
 const FIELD_MAP = {
@@ -173,49 +195,35 @@ function writeMarkdown({ version, title, type, date, body }) {
 }
 
 // ── Git commit + push to GitHub ────────────────────────────────────────
-// Railway runs the bot inside a container that holds a clone of the wiki
-// repo. The bot stages the new patch file, commits, and pushes to main.
-// We use a per-invocation auth URL so the PAT never has to be written
-// to disk in plain text.
+// All git commands run inside WORKSPACE (the cloned wiki repo).
 async function commitAndPush(version, filepath) {
   const remote = `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`;
 
-  await exec('git', ['config', 'user.name', GIT_USER_NAME]);
-  await exec('git', ['config', 'user.email', GIT_USER_EMAIL]);
+  // `cwd` makes every git command run inside the cloned repo.
+  const opts = { cwd: WORKSPACE, env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } };
 
-  // If the container started fresh, the remote URL may still be the
-  // public form — overwrite it with the authenticated one.
-  try {
-    await exec('git', ['remote', 'set-url', 'origin', remote]);
-  } catch {
-    await exec('git', ['remote', 'add', 'origin', remote]);
-  }
+  // Make sure local identity is set
+  await exec('git', ['config', 'user.name', GIT_USER_NAME], opts);
+  await exec('git', ['config', 'user.email', GIT_USER_EMAIL], opts);
 
-  await exec('git', ['add', filepath]);
-  await exec('git', [
-    'commit',
-    '-m',
-    `patch: ${version} (via Discord bot)`,
-  ]);
+  // Re-point origin to the authenticated remote (in case clone left a
+  // public URL behind)
+  await exec('git', ['remote', 'set-url', 'origin', remote], opts);
 
-  // Pull with rebase first to avoid non-fast-forward if Railway's
-  // container has an older checkout
-  try {
-    await exec('git', [
-      'pull',
-      '--rebase',
-      '--autostash',
-      `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`,
-      'main',
-    ]);
-  } catch (err) {
-    console.warn(
-      '⚠️  git pull --rebase failed (continuing anyway):',
-      err.message
-    );
-  }
+  // Pull latest so a parallel push doesn't conflict
+  await exec('git', ['fetch', 'origin', 'main'], opts);
+  await exec('git', ['reset', '--hard', 'origin/main'], opts);
 
-  await exec('git', ['push', 'origin', 'main']);
+  // Use path relative to WORKSPACE for `git add`
+  const relPath = path.relative(WORKSPACE, filepath).replace(/\\/g, '/');
+  await exec('git', ['add', relPath], opts);
+  await exec(
+    'git',
+    ['commit', '-m', `patch: ${version} (via Discord bot)`],
+    opts
+  );
+
+  await exec('git', ['push', 'origin', 'main'], opts);
   console.log(`📤 Pushed commit for ${version} to GitHub`);
 }
 
@@ -240,9 +248,16 @@ const client = new Client({
   partials: [Partials.Message, Partials.Channel],
 });
 
-client.once(Events.ClientReady, (c) => {
+client.once(Events.ClientReady, async (c) => {
   console.log(`✅ Logged in as ${c.user.tag}`);
   console.log(`📡 Watching channel ${CHANNEL_ID}`);
+  try {
+    await ensureRepo();
+    console.log(`🚀 Bot ready to publish patches`);
+  } catch (err) {
+    console.error('❌ Failed to set up wiki repo:', err);
+    // Don't exit — let the user see the error in Discord if they trigger
+  }
 });
 
 client.on(Events.MessageCreate, async (msg) => {

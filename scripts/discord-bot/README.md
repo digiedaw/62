@@ -9,7 +9,7 @@ rebuild so the site updates within ~30 seconds.
 ```
 Discord message  →  bot parses template
                        ↓
-            writes src/content/patchnote/<version>.md
+         writes <wiki-repo>/src/content/patchnote/<version>.md
                        ↓
        git add + commit + push  →  GitHub repo
                        ↓
@@ -17,6 +17,10 @@ Discord message  →  bot parses template
                        ↓
        Live at https://<your-site>.vercel.app/patchnote/<version>/
 ```
+
+**On startup the bot clones the wiki repo** into a workspace folder
+(default: `./wiki-repo`) so it has the `src/content/patchnote/` tree to
+write into. All git commands run inside that folder.
 
 ## Message template
 
