@@ -7,13 +7,15 @@ rebuild so the site updates within ~30 seconds.
 ## How it works
 
 ```
-Discord message  →  bot parses template  →  writes src/content/patchnote/<version>.md
-                                              ↓
-                                       POST to Vercel Deploy Hook
-                                              ↓
-                                       Astro rebuilds site
-                                              ↓
-                                       Live at https://62.vercel.app/patchnote/<version>/
+Discord message  →  bot parses template
+                       ↓
+            writes src/content/patchnote/<version>.md
+                       ↓
+       git add + commit + push  →  GitHub repo
+                       ↓
+            Vercel sees new commit → rebuilds site
+                       ↓
+       Live at https://<your-site>.vercel.app/patchnote/<version>/
 ```
 
 ## Message template
@@ -38,9 +40,11 @@ Fixed party invite bug.
 | `─────` | everything below becomes the Markdown body |
 
 The bot will:
-1. Reply with a ✅ embed showing what it parsed
+1. Reply with a ⏳ "Publishing…" embed
 2. Write `src/content/patchnote/<slug>.md`
-3. POST to the Vercel deploy hook (site rebuilds in ~30 s)
+3. `git add` + `git commit` + `git push` to GitHub
+4. POST to the Vercel deploy hook (optional — Vercel auto-rebuilds on push)
+5. Edit the original reply to ✅ "Patch live on the site"
 
 ## Required Discord setup
 
@@ -57,7 +61,24 @@ The bot will:
 7. In Discord: right-click your `#patches` channel → **Copy Channel ID** → `CHANNEL_ID`
 8. Create a role called **Wiki Editor** in your server → right-click it → **Copy Role ID** → `ALLOWED_ROLE_ID`
 
-## Required Vercel setup
+## Required GitHub setup
+
+The bot needs to push the new `.md` file to your repo so Vercel can rebuild.
+
+1. Go to https://github.com/settings/tokens
+2. **Generate new token** → **classic**
+3. Note: `digiwiki-bot`
+4. Expiration: your choice (90 days recommended)
+5. Scopes: check **`repo`** (full repo access)
+6. **Generate token** → copy it → `GITHUB_TOKEN`
+7. `GITHUB_REPO` = `digiedaw/62` (owner/repo)
+
+> ⚠️  This token has full write access to your repo. Keep it secret!
+
+## Required Vercel setup (optional)
+
+Vercel already auto-rebuilds on every `git push` to `main`, so this is optional.
+If you want a faster/guaranteed rebuild, add a Deploy Hook:
 
 1. Vercel dashboard → your project → **Settings** → **Git** → **Deploy Hooks**
 2. **Create Hook** → name `discord-bot` → branch `main`
@@ -74,12 +95,18 @@ npm start
 
 ## Deploying to Railway.app (free tier)
 
-1. Push this folder to its **own GitHub repo** (Railway deploys per-repo)
-   - OR add a `railway.json` at the repo root
-2. Go to https://railway.app/new → **Deploy from GitHub**
-3. Select the repo
-4. **Variables** tab → paste the four env vars from above
-5. Railway auto-builds and starts the bot
-6. Under **Settings** → set the start command to `npm start` if needed
+The bot is already wired for same-repo deploy — Railway will see
+`scripts/discord-bot/package.json` and use the included `railway.json`
++ `Procfile` to run `npm start`.
 
-The bot will stay online 24/7 on Railway's free tier.
+1. Go to https://railway.app/new → **Deploy from GitHub**
+2. Select the `digiedaw/62` repo
+3. **Variables** tab → paste all 7 env vars from `.env.example`
+4. **Settings** tab → set **Root Directory** to `scripts/discord-bot`
+   *(this is critical — Railway must build the bot folder, not the wiki)*
+5. Railway auto-builds and starts the bot
+
+The bot stays online 24/7 on Railway's free tier.
+
+> 💡 Alternative: if Railway keeps complaining about the root dir, you can
+> also create a **separate repo** containing only this folder and deploy that.

@@ -2,8 +2,11 @@
 // =====================
 // Listens to a specific Discord channel for patch-note messages,
 // parses an emoji-prefixed template, writes a Markdown file to
-// src/content/patchnote/, then triggers a Vercel rebuild via a
-// Deploy Hook URL.
+// src/content/patchnote/, COMMITS it to GitHub, then triggers a
+// Vercel rebuild via a Deploy Hook URL.
+//
+// FLOW:
+//   Discord msg  →  write .md locally  →  git add/commit/push  →  Vercel rebuild
 //
 // MESSAGE TEMPLATE (paste this into Discord):
 //
@@ -22,7 +25,12 @@
 //   DISCORD_TOKEN       - bot token from Discord Developer Portal
 //   CHANNEL_ID          - numeric ID of the channel to watch
 //   ALLOWED_ROLE_ID     - role required to use the bot (others are ignored)
+//   GITHUB_TOKEN        - Personal Access Token with `repo` scope
+//   GITHUB_REPO         - "owner/repo" form, e.g. "digiedaw/62"
+//   GIT_USER_NAME       - commit author name (e.g. "DigiWiki Bot")
+//   GIT_USER_EMAIL      - commit author email
 //   VERCEL_DEPLOY_HOOK  - URL from Vercel Settings → Git → Deploy Hooks
+//                         (optional — Vercel auto-rebuilds on git push anyway)
 
 import {
   Client,
@@ -31,12 +39,20 @@ import {
   Partials,
   EmbedBuilder,
 } from 'discord.js';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import fs from 'node:fs';
 import path from 'node:path';
+
+const exec = promisify(execFile);
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const CHANNEL_ID = process.env.CHANNEL_ID;
 const ALLOWED_ROLE_ID = process.env.ALLOWED_ROLE_ID;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_REPO = process.env.GITHUB_REPO;
+const GIT_USER_NAME = process.env.GIT_USER_NAME || 'DigiWiki Bot';
+const GIT_USER_EMAIL = process.env.GIT_USER_EMAIL || 'bot@digiedaw.local';
 const DEPLOY_HOOK = process.env.VERCEL_DEPLOY_HOOK;
 
 // ── Safety: fail fast with a clear message if env vars are missing ─────
@@ -49,18 +65,22 @@ function requireEnv(name, value) {
 requireEnv('DISCORD_TOKEN', TOKEN);
 requireEnv('CHANNEL_ID', CHANNEL_ID);
 requireEnv('ALLOWED_ROLE_ID', ALLOWED_ROLE_ID);
-requireEnv('VERCEL_DEPLOY_HOOK', DEPLOY_HOOK);
+requireEnv('GITHUB_TOKEN', GITHUB_TOKEN);
+requireEnv('GITHUB_REPO', GITHUB_REPO);
+if (DEPLOY_HOOK) {
+  console.log('ℹ️  VERCEL_DEPLOY_HOOK set — will trigger rebuilds manually.');
+} else {
+  console.log(
+    'ℹ️  No VERCEL_DEPLOY_HOOK — relying on Vercel auto-rebuild on git push.'
+  );
+}
 
 // ── Markdown file destination ──────────────────────────────────────────
-// In Railway we mount the same GitHub repo via a separate clone, so the
-// path below is relative to that working directory. Override with env if
-// your layout differs.
 const CONTENT_DIR = process.env.PATCHNOTE_DIR || 'src/content/patchnote';
 
 // ── Template parsing ───────────────────────────────────────────────────
-// Recognised emoji tags → frontmatter keys
 const FIELD_MAP = {
-  '📌': 'title',      // expected to contain "[version] — title"
+  '📌': 'title', // expected to contain "[version] — title"
   '🏷️': 'type',
   '📅': 'date',
 };
@@ -152,6 +172,53 @@ function writeMarkdown({ version, title, type, date, body }) {
   return filename;
 }
 
+// ── Git commit + push to GitHub ────────────────────────────────────────
+// Railway runs the bot inside a container that holds a clone of the wiki
+// repo. The bot stages the new patch file, commits, and pushes to main.
+// We use a per-invocation auth URL so the PAT never has to be written
+// to disk in plain text.
+async function commitAndPush(version, filepath) {
+  const remote = `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`;
+
+  await exec('git', ['config', 'user.name', GIT_USER_NAME]);
+  await exec('git', ['config', 'user.email', GIT_USER_EMAIL]);
+
+  // If the container started fresh, the remote URL may still be the
+  // public form — overwrite it with the authenticated one.
+  try {
+    await exec('git', ['remote', 'set-url', 'origin', remote]);
+  } catch {
+    await exec('git', ['remote', 'add', 'origin', remote]);
+  }
+
+  await exec('git', ['add', filepath]);
+  await exec('git', [
+    'commit',
+    '-m',
+    `patch: ${version} (via Discord bot)`,
+  ]);
+
+  // Pull with rebase first to avoid non-fast-forward if Railway's
+  // container has an older checkout
+  try {
+    await exec('git', [
+      'pull',
+      '--rebase',
+      '--autostash',
+      `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`,
+      'main',
+    ]);
+  } catch (err) {
+    console.warn(
+      '⚠️  git pull --rebase failed (continuing anyway):',
+      err.message
+    );
+  }
+
+  await exec('git', ['push', 'origin', 'main']);
+  console.log(`📤 Pushed commit for ${version} to GitHub`);
+}
+
 // ── Vercel deploy hook ─────────────────────────────────────────────────
 async function triggerRebuild(version) {
   try {
@@ -196,24 +263,48 @@ client.on(Events.MessageCreate, async (msg) => {
     const parsed = parseTemplate(msg.content);
     const filepath = writeMarkdown(parsed);
 
-    await msg.reply({
+    // Acknowledge quickly so the user isn't staring at "Bot is typing…"
+    const status = await msg.reply({
       embeds: [
         new EmbedBuilder()
-          .setColor(0x29f19c)
-          .setTitle(`✅ Patch ${parsed.version} published`)
+          .setColor(0xf5a623)
+          .setTitle(`⏳ Publishing patch ${parsed.version}…`)
           .addFields(
             { name: 'Title', value: parsed.title, inline: false },
             { name: 'Type', value: parsed.type, inline: true },
-            { name: 'Date', value: parsed.date, inline: true },
-            { name: 'File', value: `\`${filepath}\``, inline: false }
+            { name: 'Date', value: parsed.date, inline: true }
           )
           .setTimestamp(),
       ],
     });
 
+    // 1. Push to GitHub
+    await commitAndPush(parsed.version, filepath);
+
+    // 2. (Optional) trigger Vercel rebuild manually
     await triggerRebuild(parsed.version);
+
+    // 3. Edit the status message with success
+    await status.edit({
+      embeds: [
+        new EmbedBuilder()
+          .setColor(0x29f19c)
+          .setTitle(`✅ Patch ${parsed.version} live on the site`)
+          .setDescription(
+            `Pushed to GitHub → Vercel is rebuilding now.\n` +
+              `Live in ~30 s at \`/patchnote/${slugifyVersion(parsed.version)}/\``
+          )
+          .addFields(
+            { name: 'Title', value: parsed.title, inline: false },
+            { name: 'Type', value: parsed.type, inline: true },
+            { name: 'Date', value: parsed.date, inline: true }
+          )
+          .setTimestamp(),
+      ],
+    });
   } catch (err) {
     await msg.reply(`❌ Could not publish patch: ${err.message}`);
+    console.error(err);
   }
 });
 
