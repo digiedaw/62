@@ -122,6 +122,131 @@ function parseTitleLine(raw) {
   return { version: '', title: raw.trim() };
 }
 
+// Strip Discord's code-block wrapper if present. DMW staff typically
+// paste the whole patch inside a ```md … ``` block.
+function unwrapCodeBlock(raw) {
+  const fenced = raw.match(/```(?:md|markdown)?\n([\s\S]*?)\n```/);
+  if (fenced) return fenced[1];
+  return raw;
+}
+
+// Parse a full DMW-style patch Markdown document. Detects:
+//   - YAML frontmatter at the top (`---\n…\n---`)
+//   - `> **Release Date:** …` blockquote
+//   - `version: "X.Y.Z"` field (or "Patch X.Y.Z" / "vX.Y.Z" headings)
+function parseFullDocument(raw) {
+  const text = unwrapCodeBlock(raw);
+  const lines = text.split(/\r?\n/);
+
+  // 1. Pull frontmatter if present
+  const fm = {
+    title: '',
+    version: '',
+    date: new Date().toISOString().slice(0, 10),
+    type: 'Hotfix',
+    description: '',
+    emoji: '🛠️',
+    tags: [],
+    order: Date.now(),
+  };
+
+  let body = text;
+  if (lines[0]?.trim() === '---') {
+    const end = lines.indexOf('---', 1);
+    if (end > 0) {
+      const yaml = lines.slice(1, end).join('\n');
+      for (const ln of yaml.split(/\r?\n/)) {
+        const m = ln.match(/^\s*([\w-]+)\s*:\s*(.*?)\s*$/);
+        if (!m) continue;
+        const [, key, valueRaw] = m;
+        const value = valueRaw.replace(/^["']|["']$/g, '');
+        if (key === 'tags') {
+          // Accept either [a, b, c] or a, b, c
+          const arrMatch = value.match(/^\[(.*)\]$/);
+          if (arrMatch && arrMatch[1].trim() === '') {
+            fm.tags = [];
+          } else if (arrMatch) {
+            fm.tags = arrMatch[1]
+              .split(',')
+              .map((t) => t.trim().replace(/^["']|["']$/g, ''))
+              .filter(Boolean);
+          } else {
+            fm.tags = value
+              .split(',')
+              .map((t) => t.trim())
+              .filter(Boolean);
+          }
+        } else if (key in fm) {
+          fm[key] = value;
+        }
+      }
+      body = lines.slice(end + 1).join('\n').trim();
+    }
+  }
+
+  // 2. If version missing in frontmatter, try to find it in the body
+  if (!fm.version) {
+    const heading = body.match(/^#\s*(?:Patch\s+)?v?(\d+\.\d+(?:\.\d+)?)/im);
+    if (heading) fm.version = heading[1];
+  }
+  if (!fm.title && fm.version) fm.title = `Patch ${fm.version}`;
+  if (!fm.title) {
+    const h1 = body.match(/^#\s+(.+)$/m);
+    if (h1) fm.title = h1[1].trim();
+  }
+
+  // 3. Pull date from `> **Release Date:** …` if missing in frontmatter
+  if (fm.date === new Date().toISOString().slice(0, 10)) {
+    const releaseMatch = body.match(
+      />\s*\*\*Release Date:\*\*\s*([^*\n]+)/i
+    );
+    if (releaseMatch) fm.date = parseDate(releaseMatch[1]);
+  }
+
+  // 4. Detect Major vs Hotfix from keywords in the body
+  if (!/major|hotfix/i.test(fm.type)) {
+    if (/balance\s*changes|new\s*dungeon|new\s*digimon/i.test(body)) {
+      fm.type = 'Major';
+    } else {
+      fm.type = 'Hotfix';
+    }
+  }
+
+  // 5. Description: use frontmatter, else first paragraph of body
+  if (!fm.description) {
+    const para = body
+      .split(/\r?\n\r?\n/)
+      .find((p) => p.trim() && !p.startsWith('#') && !p.startsWith('>'));
+    if (para) {
+      fm.description = para
+        .replace(/[#*`_>]/g, '')
+        .replace(/\n/g, ' ')
+        .trim()
+        .slice(0, 200);
+    }
+  }
+
+  if (!fm.version) {
+    throw new Error('Could not find a version number in the document.');
+  }
+
+  return {
+    version: fm.version,
+    title: fm.title || `Patch ${fm.version}`,
+    type: fm.type === 'Major' ? 'Major' : 'Hotfix',
+    date: fm.date,
+    emoji: fm.emoji || '🛠️',
+    description: fm.description,
+    tags: Array.isArray(fm.tags)
+      ? fm.tags
+      : String(fm.tags || '')
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean),
+    body, // raw body markdown (preserves headings, tables, lists)
+  };
+}
+
 function parseTemplate(content) {
   const fields = {};
   let bodyLines = [];
@@ -283,22 +408,27 @@ function slugifyVersion(v) {
   return v.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-function writeMarkdown({ version, title, type, date, body }) {
-  const slug = slugifyVersion(version);
+// Accepts either the full DMW-style document OR the simpler {body} form
+// produced by the legacy emoji-template parser.
+function writeMarkdown(patch) {
+  const slug = slugifyVersion(patch.version);
   const filename = path.join(CONTENT_DIR, `${slug}.md`);
 
   const frontmatter = [
     '---',
-    `title: "${escapeYaml(title)}"`,
-    `version: "${escapeYaml(version)}"`,
-    `date: ${date}`,
-    `type: "${type}"`,
-    `description: "${escapeYaml(body.split('\n')[0].slice(0, 140))}"`,
-    'tags: []',
-    `order: ${Date.now()}`,
+    `title: "${escapeYaml(patch.title)}"`,
+    `emoji: ${patch.emoji || '🛠️'}`,
+    `version: "${escapeYaml(patch.version)}"`,
+    `date: ${patch.date}`,
+    `type: "${patch.type}"`,
+    `description: "${escapeYaml(patch.description || '')}"`,
+    `tags: [${(patch.tags || []).map((t) => `"${escapeYaml(t)}"`).join(', ')}]`,
+    `order: ${patch.order || Date.now()}`,
     '---',
     '',
   ].join('\n');
+
+  const body = patch.body || '';
 
   fs.mkdirSync(CONTENT_DIR, { recursive: true });
   fs.writeFileSync(filename, frontmatter + body + '\n', 'utf8');
@@ -388,8 +518,40 @@ client.on(Events.MessageCreate, async (msg) => {
   let parsed = null;
   let mode = 'unknown';
 
-  // Mode 1: Explicit 📌 template (you typed it manually)
-  if (msg.content.startsWith('📌')) {
+  // Pull content from the message OR from a forwarded snapshot
+  let rawContent = msg.content || '';
+  if (msg.messageSnapshots?.size > 0) {
+    const snap = msg.messageSnapshots.first();
+    if (snap.content) rawContent = snap.content;
+    else if (snap.embeds?.length) {
+      const e = snap.embeds[0];
+      rawContent = [e.title, e.description, ...(e.fields || []).map((f) => `${f.name}\n${f.value}`)]
+        .filter(Boolean)
+        .join('\n\n');
+    }
+  }
+
+  // Mode 1: Full DMW-style document (frontmatter or large markdown body)
+  // Heuristic: contains `---` frontmatter OR looks like a full patch
+  // (heading + version + lots of content)
+  const looksLikeFullDocument =
+    /^---$/m.test(rawContent) ||
+    (rawContent.length > 800 &&
+      /^#\s+/m.test(rawContent) &&
+      /v?\d+\.\d+/.test(rawContent));
+
+  if (looksLikeFullDocument) {
+    mode = 'document';
+    try {
+      parsed = parseFullDocument(rawContent);
+    } catch (err) {
+      return msg.reply(
+        `❌ Could not parse the patch document:\n\`${err.message}\``
+      );
+    }
+  }
+  // Mode 2: Explicit 📌 template (you typed it manually)
+  else if (msg.content.startsWith('📌')) {
     mode = 'template';
     try {
       parsed = parseTemplate(msg.content);
@@ -397,7 +559,7 @@ client.on(Events.MessageCreate, async (msg) => {
       return msg.reply(`❌ Template error: ${err.message}`);
     }
   }
-  // Mode 2: Forwarded message from another server (auto-forward)
+  // Mode 3: Forwarded message that doesn't look like a full doc
   else if (
     msg.messageSnapshots?.size > 0 ||
     msg.messageReference?.guildId
@@ -431,7 +593,9 @@ client.on(Events.MessageCreate, async (msg) => {
               { name: 'Title', value: parsed.title, inline: false },
               {
                 name: 'Body preview',
-                value: parsed.body.slice(0, 500) + (parsed.body.length > 500 ? '…' : ''),
+                value:
+                  parsed.body.slice(0, 500) +
+                  (parsed.body.length > 500 ? '…' : ''),
                 inline: false,
               }
             )
@@ -459,7 +623,7 @@ client.on(Events.MessageCreate, async (msg) => {
       }
     }
   }
-  // Mode 3: nothing relevant — silently ignore
+  // Mode 4: nothing relevant — silently ignore
   else {
     return;
   }

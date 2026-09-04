@@ -22,11 +22,26 @@ Discord message  →  bot parses template
 (default: `./wiki-repo`) so it has the `src/content/patchnote/` tree to
 write into. All git commands run inside that folder.
 
-## Three ways to publish a patch
+## Four ways to publish a patch
 
-### Mode 1 — Manual template (most reliable)
+### Mode 1 — Full DMW-style document (richest)
 
-Copy-paste this into your Discord channel and edit the values:
+The official DMW Discord posts patches as **Markdown documents** with
+frontmatter. The bot detects this format and:
+
+- Reads the YAML frontmatter (`title`, `version`, `date`, `type`, `emoji`,
+  `description`, `tags`, `order`)
+- Preserves the **entire body** — headings, tables, lists, blockquotes,
+  admonitions — as-is
+- Falls back to `> **Release Date:**` extraction if `date` is missing
+- Auto-detects `Major` vs `Hotfix` from body keywords
+
+Just forward or paste the DMW patch (with or without a Discord
+` ```md ` code-block wrapper) into your private channel.
+
+### Mode 2 — Quick emoji template
+
+For ad-hoc / quick patches, type:
 
 ```
 📌 [3.5.2] — Bug fixes & balance pass
@@ -35,26 +50,19 @@ Copy-paste this into your Discord channel and edit the values:
 ─────────────────
 Added Omnimon Zwart Defeat.
 Rebalanced SK digimon damage by -8%.
-Fixed party invite bug.
 ```
 
-### Mode 2 — Forward from another server (semi-auto)
+### Mode 3 — Forwarded plain message
 
-Forward a patch message from any Discord server into your private
-channel. The bot auto-detects patch content by scanning for:
+Forward any Discord message that mentions `patch`, `hotfix`, `update`,
+`balance`, `v3.5.2`, etc. The bot auto-detects and either:
 
-- Version-like text (`v3.5.2`, `3.5.2`, `Patch 3.5.2`)
-- Keywords: `patch`, `hotfix`, `balance`, `update`, `buff`, `nerf`,
-  `fix`, `change`, `notes`, `changelog`, `release`, `maintenance`
-- An embed title (if the original message was an embed)
+- **High confidence** → auto-publishes
+- **Medium confidence** → shows a preview, asks for ✅ reaction
 
-If confident (`high`), it auto-publishes. If unsure (`medium`), it
-shows a preview embed and waits for a ✅ reaction.
+### Mode 4 — Nothing happens (silent ignore)
 
-### Mode 3 — Reply-to-publish (workaround)
-
-If a message has no detectable version, **reply to it with a 📌
-template line** and the bot will use both sources.
+If the bot doesn't see a patch-like pattern, it does nothing.
 
 ## What the bot will do
 
@@ -63,6 +71,36 @@ template line** and the bot will use both sources.
 3. `git add` + `git commit` + `git push` to GitHub
 4. POST to the Vercel deploy hook (optional — Vercel auto-rebuilds on push)
 5. Edit the original reply to ✅ "Patch live on the site"
+
+## Local parser test
+
+A test harness is included that parses your real `patch3.5.0.md` and
+verifies all fields are extracted correctly:
+
+```bash
+cd scripts/discord-bot
+node test-parser.mjs
+```
+
+Expected output:
+
+```
+PARSED RESULT:
+{
+  "version": "3.5.0",
+  "title": "Patch 3.5.0",
+  "type": "Major",
+  "date": "2026-08-06",
+  "emoji": "🛠️",
+  "description": "Major balance pass and new content drop.",
+  "tags": [],
+  "bodyChars": 2910,
+  ...
+}
+
+✅ All expected fields match
+✅ Code-block unwrap works
+```
 
 ## Required Discord setup
 
