@@ -1,0 +1,105 @@
+﻿{
+  "raid": {
+    "eyebrow": "Hourly Schedule",
+    "title": "Spiral Raid Channels",
+    "live": "LIVE",
+    "offlineLabel": "OFFLINE",
+    "channelMinutes": 2,
+    "areas": [
+      {
+        "name": "Forest of Beginning",
+        "startMinute": 0,
+        "eyebrow": "Spiral Area",
+        "emoji": "\ud83c\udf32",
+        "image": "",
+        "channels": [
+          { "label": "CH 0", "status": "done" },
+          { "label": "CH 1", "status": "done" },
+          { "label": "CH 2", "status": "done" }
+        ]
+      },
+      {
+        "name": "Forest of Marionette",
+        "startMinute": 6,
+        "eyebrow": "Spiral Area",
+        "emoji": "\ud83c\udfad",
+        "image": "",
+        "channels": [
+          { "label": "CH 0", "status": "done" },
+          { "label": "CH 1", "status": "done" },
+          { "label": "CH 2", "status": "done" }
+        ]
+      },
+      {
+        "name": "Metal Empire",
+        "startMinute": 12,
+        "eyebrow": "Spiral Area",
+        "emoji": "\ud83c\udfed",
+        "image": "",
+        "channels": [
+          { "label": "CH 0", "status": "done" },
+          { "label": "CH 1", "status": "done" },
+          { "label": "CH 2", "status": "00:45" }
+        ]
+      },
+      {
+        "name": "Top of Nightmare",
+        "startMinute": 18,
+        "eyebrow": "Spiral Area",
+        "emoji": "\ud83d\udc79",
+        "image": "",
+        "channels": [
+          { "label": "CH 0", "status": "done" },
+          { "label": "CH 1", "status": "now" },
+          { "label": "CH 2", "status": "02:45" }
+        ]
+      }
+    ]
+  },
+  "notice": "Only SK and AA Digimon receive the 1.3x buff in the current patch. Support and Tank classes are not affected.",
+  "buffs": {
+    "title": "Digimon Buffs Rotation",
+    "multiplier": "1.3x",
+    "description": "These Digimon currently receive the event buff while the rotation is live.",
+    "members": [
+      {
+        "name": "Imperialdramon Fighter Mode (Tempered)",
+        "slug": "imperialdramon-fighter-mode",
+        "tag": "SK",
+        "emoji": "\ud83d\udc09",
+        "image": "imperialdramon-fighter"
+      },
+      {
+        "name": "Dukemon (Shin)",
+        "slug": "dukemon-shin",
+        "tag": "SK",
+        "emoji": "\ud83d\udee1\ufe0f",
+        "image": "dukemon_shin"
+      },
+      {
+        "name": "Imperialdramon Paladin Mode (Tempered)",
+        "slug": "imperialdramon-paladin-mode",
+        "tag": "AA",
+        "emoji": "\u2728",
+        "image": ""
+      },
+      {
+        "name": "JetMervamon",
+        "slug": "jetmervamon",
+        "tag": "AA",
+        "emoji": "\ud83e\udd8b",
+        "image": "jetmervamon"
+      }
+    ]
+  },
+  "patch": {
+    "title": "Last Patch",
+    "description": "The newest balance pass and content drop for Digital Masters World.",
+    "version": "Patch 3.5.1",
+    "date": "20 August 2026",
+    "summary": "Bug fixes and balance changes.",
+    "detail": "Hotfix release addressing bugs and rebalancing from 3.5.1.",
+    "emoji": "\ud83d\udd27",
+    "href": "/patchnote/"
+  }
+}

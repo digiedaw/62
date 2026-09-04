@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import EntryIcon from './EntryIcon.astro';
+import { resolveIcon } from '../lib/icons';
+
+interface Props {
+  entry: CollectionEntry<'accessories'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+
+// Name-based icon: "Tai_Goggles" or slug auto-match inside public/accessories/
+const icon = resolveIcon({ collection: 'accessories', slug: entry.id, icon: data.icon });
+---
+
+<a class="card" href={`/accessories/${entry.id}/`}>
+  <EntryIcon name={icon} emoji={data.emoji} class="emoji" />
+  <h3>{data.title}</h3>
+  <div class="meta">
+    <span class="badge blue">{data.category}</span>
+    {data.owner && <span class="badge accent">{data.owner}</span>}
+  </div>
+  <p>{data.description}</p>
+</a>

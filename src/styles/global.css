@@ -1,0 +1,299 @@
+/* ============================================================
+   DIGIWIKI THEME — "Digital World" (dark, neon green/blue)
+   Re-theme the whole site by editing ONLY these variables.
+   ============================================================ */
+:root {
+  --bg: #070b16;
+  --panel: #0d1426;
+  --panel-2: #101a33;
+  --border: #1d2b4d;
+  --text: #dbe7ff;
+  --muted: #8aa0c8;
+  --accent: #29f19c;   /* neon green */
+  --accent-2: #37c8ff; /* electric blue */
+  --danger: #ff5470;
+
+  --radius: 14px;
+  --font-body: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "Cascadia Code", "JetBrains Mono", Consolas, ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 500px at 80% -10%, rgba(41, 241, 156, 0.08), transparent 60%),
+    radial-gradient(900px 400px at 10% 110%, rgba(55, 200, 255, 0.07), transparent 60%),
+    linear-gradient(rgba(29, 43, 77, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 43, 77, 0.22) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+  min-height: 100vh;
+}
+
+a { color: var(--accent-2); text-decoration: none; }
+a:hover { color: var(--accent); }
+
+h1, h2, h3, h4 { font-family: var(--font-mono); letter-spacing: 0.02em; line-height: 1.25; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 0.5rem; }
+h2 { font-size: 1.3rem; border-bottom: 2px solid var(--border); padding-bottom: 0.35rem; margin-top: 2rem; }
+
+code, pre { font-family: var(--font-mono); }
+code {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.88em;
+}
+pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+pre code { background: none; border: none; padding: 0; }
+
+hr { border: none; border-top: 2px dashed var(--border); margin: 2rem 0; }
+
+/* ------------------------------------------------------------
+   ALTERNATE PALETTES — copy any block below over the color
+   variables inside :root above to re-skin the whole site.
+
+   ☀️ "Classic Paper" (light wiki, Wikipedia-ish):
+     --bg: #f6f7fb;         --panel: #ffffff;     --panel-2: #eef1f8;
+     --border: #d5dbea;     --text: #1c2333;      --muted: #5b6579;
+     --accent: #7c3aed;     --accent-2: #2563eb;
+
+   🌌 "Cyber Violet":
+     --bg: #0e091c;         --panel: #170f2e;     --panel-2: #1e153d;
+     --border: #35235e;     --text: #ece6ff;      --muted: #a794d4;
+     --accent: #c084fc;     --accent-2: #22d3ee;
+
+   🍃 "Mint Terminal":
+     --bg: #07100d;         --panel: #0b1a14;     --panel-2: #0f241b;
+     --border: #1d3a2c;     --text: #dcf5e9;      --muted: #7fb8a0;
+     --accent: #34f5c5;     --accent-2: #a3e635;
+   ------------------------------------------------------------ */
+
+.container { max-width: 1150px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ---- back-to-hub link ------------------------------------- */
+.back {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  display: inline-block;
+  margin: 0 0 0.75rem;
+}
+.back a { color: var(--muted); }
+.back a:hover { color: var(--accent); }
+
+/* ---- wiki layout: sidebar + content ---------------------- */
+.page-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  padding: 2rem 0 4rem;
+}
+@media (max-width: 860px) {
+  .page-grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ---- small UI pieces -------------------------------------- */
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--panel-2);
+}
+.badge.accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.badge.blue   { color: var(--accent-2); border-color: color-mix(in srgb, var(--accent-2) 40%, transparent); }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { background: var(--accent); color: #04121f; }
+.btn.solid { background: var(--accent); color: #04121f; }
+.btn.solid:hover { filter: brightness(1.12); }
+
+/* ---- cards ------------------------------------------------ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  color: var(--text);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow: 0 8px 30px rgba(41, 241, 156, 0.09);
+  color: var(--text);
+}
+.card .emoji { font-size: 2rem; line-height: 1; }
+.card h3 { margin: 0; font-size: 1.05rem; color: var(--accent-2); }
+.card .meta { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+/* ---- markdown article body -------------------------------- */
+.prose { max-width: 75ch; }
+.prose img { max-width: 100%; border-radius: var(--radius); }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose li { margin: 0.3rem 0; }
+.prose blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--panel);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+}
+.prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+.prose th, .prose td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+.prose th { font-family: var(--font-mono); background: var(--panel-2); color: var(--accent-2); }
+
+/* misc */
+.muted { color: var(--muted); }
+
+/* ---- shared filter bar & filterable grids ---- */
+.count {
+  font-size: 0.8rem;
+  color: var(--accent);
+  vertical-align: middle;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.filters select {
+  min-width: 150px;
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.filters select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(41, 241, 156, 0.15);
+}
+.filters .btn {
+  align-self: flex-end;
+}
+.f-count {
+  margin: 0 0 0 auto;
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.cell {
+  display: flex;
+}
+.cell > .card {
+  width: 100%;
+}
+
+/* ============================================================
+   Admonitions (Docusaurus-style :::tip / :::success / etc.)
+   Generated by src/lib/remark-admonitions.mjs
+   ============================================================ */
+.admonition {
+  margin: 1.25rem 0;
+  border-left: 4px solid;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+}
+.admonition-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.95rem 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.admonition-icon { font-size: 1rem; }
+.admonition-title {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.admonition-content {
+  padding: 0.2rem 0.95rem 0.8rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.admonition-content p { margin: 0 0 0.4rem; }
+.admonition-content ul { margin: 0; padding-left: 1.25rem; }
+.admonition-content li { margin: 0.15rem 0; }
+.admonition-content strong { color: var(--accent-2); }
+
+.admonition-note      { border-color: var(--muted);   background: color-mix(in srgb, var(--muted) 8%,   var(--panel)); }
+.admonition-note      .admonition-title { color: var(--muted); }
+.admonition-tip       { border-color: var(--accent);  background: color-mix(in srgb, var(--accent) 8%,  var(--panel)); }
+.admonition-tip       .admonition-title { color: var(--accent); }
+.admonition-info      { border-color: #4aa8ff;        background: color-mix(in srgb, #4aa8ff 10%,        var(--panel)); }
+.admonition-info      .admonition-title { color: #4aa8ff; }
+.admonition-warning   { border-color: #ffb84a;        background: color-mix(in srgb, #ffb84a 10%,        var(--panel)); }
+.admonition-warning   .admonition-title { color: #ffb84a; }
+.admonition-danger    { border-color: #ff5566;        background: color-mix(in srgb, #ff5566 10%,        var(--panel)); }
+.admonition-danger    .admonition-title { color: #ff5566; }
+.admonition-success   { border-color: #29d97a;        background: color-mix(in srgb, #29d97a 10%,        var(--panel)); }
+.admonition-success   .admonition-title { color: #29d97a; }
+.admonition-important { border-color: #b566ff;        background: color-mix(in srgb, #b566ff 10%,        var(--panel)); }
+.admonition-important .admonition-title { color: #b566ff; }
+.admonition-caution   { border-color: #ffb84a;        background: color-mix(in srgb, #ffb84a 10%,        var(--panel)); }
+.admonition-caution   .admonition-title { color: #ffb84a; }

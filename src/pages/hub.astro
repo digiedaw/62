@@ -1,0 +1,235 @@
+---
+/**
+ * CATEGORY HUB — the bridge between the homepage and every section.
+ *
+ * Cards are generated automatically from the navigation registry:
+ * curated collections + every auto-discovered src/content/<folder>/.
+ * Card metadata (emoji / tag / blurb) lives in src/lib/navigation.ts
+ * (SIDEBAR_SECTIONS for curated, HUB_META for auto folders).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import {
+  SIDEBAR_SECTIONS,
+  getAutoSections,
+  buildNavSection,
+} from '../lib/navigation';
+import data from '../data/homepage.json';
+
+const allSections = [...SIDEBAR_SECTIONS, ...getAutoSections()];
+
+/**
+ * Sections to hide from the hub card grid.
+ * `patchnote` has its own dedicated CTA button below the grid,
+ * so we skip its auto-generated card to avoid showing two of them.
+ * `items` and `progression` are intentionally not surfaced as hub cards.
+ */
+const HIDDEN_HUB_CARDS = new Set(['patchnote', 'items', 'progression']);
+
+const cards = await Promise.all(
+  allSections
+    .filter((section) => !HIDDEN_HUB_CARDS.has(section.collection))
+    .map(async (section) => {
+      const nav = buildNavSection(
+        section,
+        await getCollection(
+          section.collection as Parameters<typeof getCollection>[0]
+        )
+      );
+      return {
+        label: section.label,
+        href: section.href,
+        emoji: section.emoji ?? '📄',
+        tag: section.tag ?? section.label.toUpperCase(),
+        blurb: section.blurb ?? `Browse all ${section.label} entries.`,
+        total: nav.total,
+      };
+    })
+);
+
+const totalPages = cards.reduce((sum, c) => sum + c.total, 0);
+---
+
+<BaseLayout
+  title="All Entries — DIGIWIKI"
+  description="Every category of the DIGIWIKI knowledge base in one hub."
+>
+  <div class="hub">
+    <header class="hub-head">
+      <h1>All Entries</h1>
+      <p class="muted">{totalPages} pages · {cards.length} categories</p>
+    </header>
+
+    <div class="cat-grid">
+      {
+        cards.map((card) => (
+          <a class="cat-card panel" href={card.href}>
+            <span class="icon" aria-hidden="true">
+              {card.emoji}
+            </span>
+            <div class="cat-head">
+              <h2>{card.label}</h2>
+              <span class="badge">{card.tag}</span>
+            </div>
+            <p>{card.blurb}</p>
+          </a>
+        ))
+      }
+    </div>
+
+    {
+      data.patch && (
+        <a
+          class="patch-note panel"
+          href={data.patch.href || '/patchnote/'}
+          aria-label="View all patch notes"
+        >
+          <div class="pn-head">
+            <span class="pn-icon" aria-hidden="true">
+              {data.patch.emoji}
+            </span>
+            <div class="pn-body">
+              <p class="pn-title">
+                Patch Note
+                <span class="pn-go" aria-hidden="true">→</span>
+              </p>
+              <p class="pn-summary">{data.patch.summary}</p>
+              <p class="pn-detail">{data.patch.detail}</p>
+            </div>
+          </div>
+        </a>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .hub {
+    padding: 2.5rem 0 4rem;
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+  .hub-head h1 {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 2rem;
+    margin: 0 0 0.35rem;
+  }
+  .hub-head p {
+    margin: 0 0 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    color: var(--text);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .cat-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-2px);
+  }
+  .cat-card:hover h2 {
+    color: var(--accent);
+  }
+  .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+  .cat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .cat-card h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--accent-2);
+  }
+  .cat-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .patch-note {
+    padding: 1.1rem 1.25rem;
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .patch-note:hover {
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translateY(-1px);
+  }
+  .patch-note:hover .pn-go {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+  .pn-head {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+  }
+  .pn-body { flex: 1; min-width: 0; }
+  .pn-go {
+    display: inline-block;
+    margin-left: 0.4rem;
+    color: var(--muted);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+  .pn-icon {
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    background: color-mix(in srgb, var(--accent-2) 12%, var(--panel-2));
+    border: 1px solid color-mix(in srgb, var(--accent-2) 30%, transparent);
+  }
+  .pn-title {
+    margin: 0 0 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  .pn-summary {
+    margin: 0 0 0.1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .pn-detail {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>

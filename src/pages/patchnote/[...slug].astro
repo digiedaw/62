@@ -1,0 +1,206 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import EntryIcon from '../../components/EntryIcon.astro';
+import { getCollection, render } from 'astro:content';
+import { resolveIcon } from '../../lib/icons';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('patchnote');
+  // Newest first
+  const sorted = [...entries].sort(
+    (a, b) => +new Date(b.data.date) - +new Date(a.data.date)
+  );
+  return sorted.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: index < sorted.length - 1 ? sorted[index + 1] : undefined,
+      next: index > 0 ? sorted[index - 1] : undefined,
+    },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'patchnote'>;
+  prev?: CollectionEntry<'patchnote'>;
+  next?: CollectionEntry<'patchnote'>;
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+const icon = resolveIcon({ collection: 'patchnote', slug: entry.id, icon: data.icon });
+
+const fmtDate = (d: string | Date) => {
+  const date = typeof d === 'string' ? new Date(d) : d;
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+const isLatest = !next;
+---
+
+<BaseLayout title={`${data.title} — DIGIWIKI`} description={data.summary}>
+  <div class="page-grid">
+    <Sidebar collection="patchnote" />
+    <article>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/hub/">← All Entries</a> <span>/</span> <a href="/patchnote/">Patch Notes</a> <span>/</span> <span class="here">{data.title}</span>
+      </nav>
+
+      <header class="head panel">
+        <EntryIcon name={icon} emoji={data.emoji} class="emoji" />
+        <div class="head-body">
+          <p class="eyebrow">{isLatest ? 'Latest Patch' : 'Patch Note'}</p>
+          <h1>{data.title}</h1>
+          <div class="meta">
+            {data.type && <span class={`type type-${String(data.type).toLowerCase()}`}>{data.type}</span>}
+            <span class="date">{fmtDate(data.date)}</span>
+          </div>
+          {data.summary && <p class="lead">{data.summary}</p>}
+          {data.detail && <p class="detail">{data.detail}</p>}
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <nav class="pager" aria-label="Patch navigation">
+        {prev
+          ? <a class="pager-link prev" href={`/patchnote/${prev.id}/`}>
+              <span class="pager-eyebrow">← Older</span>
+              <span class="pager-title">{prev.data.title}</span>
+            </a>
+          : <span class="pager-link empty" aria-hidden="true"></span>
+        }
+        <a class="pager-link all" href="/patchnote/">
+          <span class="pager-eyebrow">Archive</span>
+          <span class="pager-title">All patches</span>
+        </a>
+        {next
+          ? <a class="pager-link next" href={`/patchnote/${next.id}/`}>
+              <span class="pager-eyebrow">Newer →</span>
+              <span class="pager-title">{next.data.title}</span>
+            </a>
+          : <span class="pager-link empty" aria-hidden="true"></span>
+        }
+      </nav>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .head {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .head :global(.emoji) {
+    font-size: 4rem;
+    line-height: 1;
+    flex: none;
+    width: 1em;
+  }
+  .head-body { flex: 1; min-width: 0; }
+  .eyebrow {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  .head h1 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    border: none;
+    padding: 0;
+  }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+  }
+  .date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .type {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .type-major {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .type-hotfix { color: var(--muted); }
+  .lead {
+    margin: 0 0 0.35rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--text);
+  }
+  .detail {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .prose { margin-bottom: 2rem; }
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .pager-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 1rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .pager-link:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-1px);
+  }
+  .pager-link.all { text-align: center; min-width: 110px; align-self: center; }
+  .pager-link.next { text-align: right; align-items: flex-end; }
+  .pager-link.empty {
+    background: transparent;
+    border-color: transparent;
+    pointer-events: none;
+  }
+  .pager-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .pager-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--accent-2);
+  }
+  .pager-link:hover .pager-title { color: var(--accent); }
+</style>

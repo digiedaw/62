@@ -1,0 +1,533 @@
+[31m[1m14:59:14[22m [ERROR][39m digimonCount is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\pages\patchnote.astro:32:101)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m14:59:17[22m [ERROR][39m digimonCount is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\pages\patchnote.astro:32:101)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:01:23[22m [ERROR][39m [31m[UnhandledRejection][39m Astro detected an unhandled rejection. Here's the stack trace:
+Error: EBUSY: resource busy or locked, watch 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\pages\patchnote.astro.bak'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22195:17)
+    at setFsWatchListener (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22242:15)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22397:14)
+    at NodeFsHandler._handleFile (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22461:23)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22703:21)
+  [1mHint:[22m
+[33m    Make sure your promises all have an `await` or a `.catch()` handler.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unhandled-rejection/[24m[39m
+  [1mStack trace:[22m
+[2m    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:29:50[22m [ERROR][39m latestPatchHref is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\pages\index.astro:188:40)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:33:21[22m [ERROR][39m Failed to parse JSON file, invalid JSON syntax found at position 3253
+  [1mStack trace:[22m
+[2m    at C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/src/data/homepage.json:119:3
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+The collection "patchnote" does not exist or is empty. Please check your content config file for errors.
+[Shiki] 10 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.
+The collection "patchnote" does not exist or is empty. Please check your content config file for errors.
+The collection "patchnote" does not exist or is empty. Please check your content config file for errors.
+[Shiki] 20 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.
+[31m[1m18:01:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:01:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:02:39[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:02:41[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:02:48[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:02:48[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:03:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:03:26[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:53[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:54[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:55[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:55[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:57[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:18:57[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:10[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:10[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:14[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:14[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:18[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:18[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:19[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:19[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:23[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:24[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:25[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:55[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:55[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:56[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:56[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:57[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m11:32:57[22m [ERROR][39m Failed to parse JSON file.
+  [1mStack trace:[22m
+[2m    at TransformPluginContext._formatLog (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:10:49[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:10:51[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:23[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:25[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:36[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:38[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:45[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:48[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mguide → test[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\guide\test.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m18:11:51[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  ENOENT: no such file or directory, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:25:06[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1msystem → attribute[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:25:13[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:25:17[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:26:09[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:26:43[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  ENOENT: no such file or directory, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:33:24[22m [ERROR][39m [31m[UnhandledRejection][39m Astro detected an unhandled rejection. Here's the stack trace:
+Error: EBUSY: resource busy or locked, watch 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\public\misc\attribute.jpg'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22195:17)
+    at setFsWatchListener (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22242:15)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22397:14)
+    at NodeFsHandler._handleFile (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22461:23)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22703:21)
+  [1mHint:[22m
+[33m    Make sure your promises all have an `await` or a `.catch()` handler.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unhandled-rejection/[24m[39m
+  [1mStack trace:[22m
+[2m    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:33:43[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:33:44[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:35:57[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:38:30[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m01:38:51[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  EPERM: operation not permitted, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[Shiki] 30 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.
+[31m[1m02:38:02[22m [ERROR][39m [31m[UnhandledRejection][39m Astro detected an unhandled rejection. Here's the stack trace:
+Error: EBUSY: resource busy or locked, watch 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\._draft\_reconv_novice.py'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22195:17)
+    at setFsWatchListener (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22242:15)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22397:14)
+    at NodeFsHandler._handleFile (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22461:23)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:22703:21)
+  [1mHint:[22m
+[33m    Make sure your promises all have an `await` or a `.catch()` handler.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unhandled-rejection/[24m[39m
+  [1mStack trace:[22m
+[2m    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m02:41:13[22m [ERROR] [config][39m Cannot read properties of undefined (reading 'split')
+  [1mStack trace:[22m
+[2m    at stringify (file:///C:/Users/hhhhhhhhhhhhhhhhhhhh/Desktop/project/digimon-app/node_modules/astro/dist/core/errors/zod-error-map.js:91:56)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+
+[31m[1m02:41:13[22m [ERROR][39m Continuing with previous valid configuration
+
+[Shiki] 40 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.
+The collection "digimon" does not exist or is empty. Please check your content config file for errors.
+The collection "digimon" does not exist or is empty. Please check your content config file for errors.
+The collection "accessories" does not exist or is empty. Please check your content config file for errors.
+The collection "dungeon" does not exist or is empty. Please check your content config file for errors.
+The collection "guide" does not exist or is empty. Please check your content config file for errors.
+The collection "items" does not exist or is empty. Please check your content config file for errors.
+The collection "patchnote" does not exist or is empty. Please check your content config file for errors.
+The collection "playstyle" does not exist or is empty. Please check your content config file for errors.
+The collection "progression" does not exist or is empty. Please check your content config file for errors.
+The collection "system" does not exist or is empty. Please check your content config file for errors.
+[Shiki] 50 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.
+[31m[1m03:44:52[22m [ERROR][39m [31m[UnknownFilesystemError][39m 
+  [1mHint:[22m
+[33m    It can be caused by many things, eg. missing permissions or a file not existing we attempt to read. Check the error cause for more details.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unknown-filesystem-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\node_modules\astro\dist\content\mutable-data-store.js:337:13
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+  [1mCaused by:[22m
+[2m  ENOENT: no such file or directory, rename 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json.tmp' -> 'C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\.astro\data-store.json'
+    at async Object.rename (node:internal/fs/promises:785:10)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m

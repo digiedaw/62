@@ -1,0 +1,89 @@
+---
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/digimon/', label: 'Digimon' },
+  { href: '/accessories/', label: 'Accessories' },
+  { href: '/search/', label: 'Search' },
+  { href: '/about/', label: 'About' },
+];
+
+const isActive = (href: string): boolean => {
+  const normalized = href.replace(/\/+$/, '') || '/';
+  return normalized === '/' ? path === '/' : path.startsWith(normalized);
+};
+---
+
+<header>
+  <div class="container bar">
+    <a class="logo" href="/">
+      <span class="mark">◤◢</span>&nbsp;DIGI<span>WIKI</span>
+    </a>
+    <nav aria-label="Main navigation">
+      {
+        links.map((link) => (
+          <a href={link.href} class:list={[{ active: isActive(link.href) }]}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 60px;
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .logo .mark { color: var(--accent-2); }
+  .logo span:last-child {
+    color: var(--accent);
+    text-shadow: 0 0 12px rgba(41, 241, 156, 0.45);
+  }
+  .logo:hover { color: #ffffff; }
+  nav {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    color: var(--muted);
+    border: 1px solid transparent;
+  }
+  nav a:hover {
+    color: var(--accent);
+    background: var(--panel-2);
+  }
+  nav a.active {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    background: var(--panel);
+  }
+</style>

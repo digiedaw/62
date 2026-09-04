@@ -1,0 +1,71 @@
+---
+/**
+ * EntryIcon — the ONE place entry icons/images get rendered.
+ *
+ * Set the optional `icon` field in any entry's frontmatter. Two supported values:
+ *
+ *   1) IMAGE PATH under /public  ← works today, zero JS:
+ *        icon: "digimon/Agumon.png"
+ *      Resolved relative to the /public folder → served at /digimon/Agumon.png.
+ *      Folders you already have: public/digimon/, public/accessories/,
+ *      public/items/, public/icons/
+ *      Supported extensions: .svg .png .jpg .jpeg .webp .avif .gif
+ *
+ *   2) ICON-LIBRARY NAME (for later):
+ *        icon: "lucide:swords"
+ *      Anything WITHOUT an image extension is treated as a library name.
+ *      Install your library, then render it in the TODO block below, e.g.:
+ *        npx astro add icon            →  import { Icon } from 'astro-icon/components';
+ *                                         <Icon name={name} />
+ *        npm i lucide-astro            →  import Swords from 'lucide-astro/swords';
+ *
+ * When `icon` is not set at all, the legacy hardcoded `emoji` is shown,
+ * so existing content keeps working unchanged.
+ */
+interface Props {
+  /** Image path under /public ("digimon/Agumon.png") or icon-library name ("lucide:swords") */
+  name?: string;
+  /** Legacy fallback: hardcoded emoji from frontmatter */
+  emoji?: string;
+  /** Extra class(es) so existing styles (.card .emoji etc.) keep applying */
+  class?: string;
+}
+
+const { name, emoji, class: className } = Astro.props;
+
+/** Values ending in an image extension are treated as /public file paths */
+const IMAGE_EXT_RE = /\.(svg|png|jpe?g|webp|avif|gif)$/i;
+const imagePath =
+  name && IMAGE_EXT_RE.test(name)
+    ? name.startsWith('/')
+      ? name
+      : `/${name}` // resolve relative to /public
+    : undefined;
+---
+
+<span class:list={[className]} aria-hidden="true">
+  {
+    imagePath ? (
+      <img src={imagePath} alt="" loading="lazy" decoding="async" />
+    ) : name ? (
+      <span class="icon-slot" data-icon={name}>
+        {/* TODO(you): icon-library NAME detected but no lib wired up yet.
+            Replace this empty span with your imported icon component. */}
+      </span>
+    ) : (
+      emoji
+    )
+  }
+</span>
+
+<style>
+  /* Images inherit size from context font-size:
+     .card .emoji = 2rem, sidebar text ≈ 0.92rem, detail header = 3rem */
+  img {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: -0.125em;
+  }
+</style>

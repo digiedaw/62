@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import EntryIcon from './EntryIcon.astro';
+import { resolveIcon } from '../lib/icons';
+
+interface Props {
+  entry: CollectionEntry<'digimon'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+
+// Name-based icon: "Dukemon_Shin" or slug auto-match inside public/digimon/
+const icon = resolveIcon({ collection: 'digimon', slug: entry.id, icon: data.icon });
+---
+
+<a class="card" href={`/digimon/${entry.id}/`}>
+  <EntryIcon name={icon} emoji={data.emoji} class="emoji" />
+  <h3>{data.title}</h3>
+  <div class="meta">
+    {data.rank && <span class="badge accent">{data.rank}</span>}
+    {data.role && <span class="badge blue">{data.role}</span>}
+    {data.attribute && <span class="badge">{data.attribute}</span>}
+  </div>
+  <p>{data.description}</p>
+</a>

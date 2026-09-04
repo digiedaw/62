@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import AccessoryCard from '../../components/AccessoryCard.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('accessories');
+
+const categories = ['Goggles', 'Digivice', 'Equipment', 'Cloth', 'Guide'] as const;
+
+const groups = categories
+  .map((category) => ({
+    label: category,
+    items: entries
+      .filter((e) => e.data.category === category)
+      .sort((a, b) => a.data.order - b.data.order),
+  }))
+  .filter((group) => group.items.length > 0);
+---
+
+<BaseLayout
+  title="Accessories — DIGIWIKI"
+  description="Goggles, digivices, equipment and clothing from the Digital World."
+>
+  <div class="page-grid">
+    <Sidebar collection="accessories" />
+    <div>
+      <p class="back"><a href="/hub/">← All Entries</a></p>
+      <h1>Accessories</h1>
+      <p class="muted">
+        {entries.length} items · grouped by category
+      </p>
+
+      <!-- Category filter -->
+      <div class="filters panel">
+        <label>
+          Category
+          <select id="f-category">
+            <option value="">All</option>
+            {categories.map((category) => (
+              <option value={category}>{category}</option>
+            ))}
+          </select>
+        </label>
+
+        <button id="f-reset" class="btn" type="button">✕ Reset</button>
+        <p id="f-count" class="f-count muted" aria-live="polite"></p>
+      </div>
+
+      {
+        groups.map((group) => (
+          <section data-group={group.label}>
+            <h2>
+              {group.label} <span class="count">{group.items.length}</span>
+            </h2>
+            <div class="card-grid">
+              {group.items.map((entry) => (
+                <div class="cell" data-category={entry.data.category}>
+                  <AccessoryCard entry={entry} />
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const categorySelect = document.getElementById('f-category') as HTMLSelectElement;
+  const resetBtn = document.getElementById('f-reset');
+  const countEl = document.getElementById('f-count');
+
+  const cells = Array.from(document.querySelectorAll<HTMLElement>('.cell'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('section[data-group]'));
+
+  function applyFilters(): void {
+    const category = categorySelect.value;
+    let visible = 0;
+
+    for (const cell of cells) {
+      const show = !category || cell.dataset.category === category;
+      cell.hidden = !show;
+      if (show) visible++;
+    }
+
+    // Hide whole category sections that ended up empty
+    for (const section of sections) {
+      const anyVisible = Array.from(
+        section.querySelectorAll<HTMLElement>('.cell')
+      ).some((cell) => !cell.hidden);
+      section.hidden = !anyVisible;
+    }
+
+    if (countEl) {
+      countEl.textContent = `${visible} of ${cells.length} items match`;
+    }
+  }
+
+  categorySelect.addEventListener('change', applyFilters);
+
+  resetBtn?.addEventListener('click', () => {
+    categorySelect.value = '';
+    applyFilters();
+  });
+
+  applyFilters();
+</script>

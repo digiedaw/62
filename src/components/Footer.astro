@@ -1,0 +1,35 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container inner">
+    <p>
+      ▚ DIGI<span>WIKI</span> — a fan-made knowledge base built with
+      <a href="https://astro.build">Astro</a>.
+    </p>
+    <p class="muted">
+      Digimon is a trademark of Bandai / Akiyoshi Hongo. This is an unofficial,
+      non-commercial fan project. © {year}
+    </p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    margin-top: 2rem;
+  }
+  .inner {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer p { margin: 0.25rem 0; }
+  footer span {
+    font-family: var(--font-mono);
+    color: var(--accent);
+  }
+</style>

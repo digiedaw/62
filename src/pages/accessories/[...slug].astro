@@ -1,0 +1,124 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import EntryIcon from '../../components/EntryIcon.astro';
+import { getCollection, render } from 'astro:content';
+import { resolveIcon } from '../../lib/icons';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('accessories');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'accessories'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Prev / next navigation across the accessories collection (sorted by "order")
+const all = (await getCollection('accessories')).sort((a, b) => a.data.order - b.data.order);
+const index = all.findIndex((e) => e.id === entry.id);
+const prev = index > 0 ? all[index - 1] : undefined;
+const next = index >= 0 && index < all.length - 1 ? all[index + 1] : undefined;
+
+const data = entry.data;
+
+// Name-based icon: bare name or slug auto-match inside public/accessories/
+const icon = resolveIcon({ collection: 'accessories', slug: entry.id, icon: data.icon });
+---
+
+<BaseLayout title={`${data.title} — DIGIWIKI`} description={data.description}>
+  <div class="page-grid">
+    <Sidebar collection="accessories" />
+    <article>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/hub/">← All Entries</a> <span>/</span> <a href="/accessories/">Accessories</a> <span>/</span> <span class="here">{data.title}</span>
+      </nav>
+
+      <header class="head panel">
+        <EntryIcon name={icon} emoji={data.emoji} class="emoji" />
+        <div>
+          <h1>{data.title}</h1>
+          <div class="meta">
+            {data.category && <span class="badge blue">{data.category}</span>}
+            {data.owner && <span class="badge accent">Owner: {data.owner}</span>}
+          </div>
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        data.tags.length > 0 && (
+          <p class="tags">
+            {data.tags.map((tag) => (
+              <span class="badge">#{tag}</span>
+            ))}
+          </p>
+        )
+      }
+
+      <hr />
+
+      <nav class="pager" aria-label="Entry navigation">
+        {
+          prev ? (
+            <a class="btn" href={`/accessories/${prev.id}/`}>
+              ← {prev.data.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next ? (
+            <a class="btn" href={`/accessories/${next.id}/`}>
+              {next.data.title} →
+            </a>
+          ) : (
+            <span />
+          )
+        }
+      </nav>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumbs {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .here { color: var(--accent); }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .head :global(.emoji) { font-size: 4rem; line-height: 1; }
+  .head h1 { margin: 0 0 0.4rem; }
+  .meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

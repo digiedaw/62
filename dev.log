@@ -1,0 +1,345 @@
+
+> digimon-app@0.0.1 dev
+> astro dev --host 127.0.0.1 --port 4321
+
+[2m13:30:41[22m [34m[types][39m Generated [2m1ms[22m
+[2m13:30:42[22m [34m[content][39m Syncing content
+[2m13:30:42[22m [34m[content][39m Astro config changed
+[2m13:30:42[22m [34m[content][39m Clearing content store
+[2m13:30:43[22m [34m[content][39m Synced content
+[2m13:30:43[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+
+[42m[1m astro [22m[49m [32mv5.18.2[39m [2mready in[22m 2867 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4321/[39m
+
+[2m13:30:43[22m [32mwatching for file changes...[39m
+[2m13:30:46[22m [34m[200][39m / [2m100ms[22m
+[2m13:31:35[22m [34m[200][39m / [2m19ms[22m
+[2m13:32:09[22m [34m[200][39m / [2m19ms[22m
+[2m13:32:18[22m [34m[200][39m / [2m13ms[22m
+[2m13:32:28[22m [34m[200][39m / [2m9ms[22m
+[2m13:32:29[22m [34m[200][39m / [2m11ms[22m
+[2m13:32:48[22m [34m[200][39m / [2m11ms[22m
+[2m13:33:40[22m [34m[watch][39m src/pages/index.astro
+[2m13:33:41[22m [34m[200][39m / [2m18ms[22m
+[2m13:34:21[22m [34m[watch][39m src/pages/index.astro
+[2m13:34:22[22m [34m[200][39m / [2m16ms[22m
+[2m13:34:38[22m [34m[watch][39m src/pages/index.astro
+[2m13:34:38[22m [34m[200][39m / [2m22ms[22m
+[2m13:36:46[22m [34m[200][39m /digimon/jetmervamon/ [2m25ms[22m
+[33m[1m13:36:46[22m [WARN] [router][39m A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/digimon/cosmic-susanoomon.png`.
+
+Possible dynamic routes being matched: src/pages/digimon/[...slug].astro, src/pages/[collection]/[...slug].astro.
+[2m13:36:46[22m [33m[404][39m /digimon/cosmic-susanoomon.png [2m3ms[22m
+[2m13:37:35[22m [34m[200][39m / [2m15ms[22m
+[2m13:41:40[22m [34m[200][39m /hub/ [2m9ms[22m
+[2m13:44:23[22m [34m[200][39m /hub/ [2m9ms[22m
+[2m13:48:54[22m [34m[200][39m /hub/ [2m7ms[22m
+[2m13:48:55[22m [34m[200][39m / [2m19ms[22m
+[2m13:48:57[22m [34m[200][39m /patchnote/ [2m9ms[22m
+[2m13:48:59[22m [34m[200][39m /patchnote/ [2m6ms[22m
+[2m13:53:49[22m [34m[200][39m /patchnote/ [2m13ms[22m
+[2m13:54:02[22m [34m[watch][39m /src/pages/hub.astro?astro&type=style&index=0&lang.css
+[2m13:54:03[22m [34m[200][39m /patchnote/ [2m10ms[22m
+[2m13:54:12[22m [34m[watch][39m /src/pages/hub.astro?astro&type=style&index=0&lang.css
+[2m13:54:13[22m [34m[200][39m /patchnote/ [2m9ms[22m
+[2m13:58:31[22m [34m[200][39m / [2m9ms[22m
+[2m13:58:32[22m [34m[200][39m /patchnote/ [2m7ms[22m
+[2m13:59:13[22m [34m[200][39m /hub/ [2m9ms[22m
+[2m13:59:15[22m [34m[200][39m /patchnote/ [2m11ms[22m
+[2m14:00:24[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:00:33[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:00:33[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:00:56[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:01:05[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:02:47[22m [34m[watch][39m src/pages/index.astro
+[2m14:02:55[22m [34m[watch][39m src/pages/index.astro
+[2m14:03:41[22m [34m[watch][39m /src/pages/hub.astro?astro&type=style&index=0&lang.css
+[2m14:12:02[22m [34m[200][39m / [2m17ms[22m
+[2m14:12:04[22m [34m[200][39m /hub/ [2m12ms[22m
+[2m14:12:06[22m [34m[200][39m /patchnote/ [2m16ms[22m
+[2m14:12:07[22m [34m[200][39m /patchnote/3.5.1/ [2m17ms[22m
+[2m14:12:13[22m [34m[200][39m /patchnote/3.5.0/ [2m8ms[22m
+[2m14:12:18[22m [34m[200][39m /system/overview/ [2m14ms[22m
+[2m14:12:20[22m [34m[200][39m /system/ [2m13ms[22m
+[2m14:12:23[22m [34m[200][39m /system/overview/ [2m7ms[22m
+[2m14:12:24[22m [34m[200][39m /hub/ [2m6ms[22m
+[2m14:12:26[22m [34m[200][39m /system/ [2m8ms[22m
+[2m14:12:28[22m [34m[200][39m /system/overview/ [2m11ms[22m
+[2m14:12:40[22m [34m[200][39m /hub/ [2m6ms[22m
+[2m14:12:41[22m [34m[200][39m /patchnote/ [2m7ms[22m
+[2m14:12:43[22m [34m[200][39m /patchnote/3.5.1/ [2m5ms[22m
+[2m14:12:48[22m [34m[200][39m /patchnote/3.5.0/ [2m10ms[22m
+[2m14:12:52[22m [34m[200][39m /patchnote/3.4.2/ [2m9ms[22m
+[2m14:13:44[22m [34m[200][39m / [2m6ms[22m
+[2m14:13:51[22m [34m[watch][39m /src/components/Sidebar.astro?astro&type=style&index=0&lang.css
+[2m14:13:52[22m [34m[200][39m / [2m25ms[22m
+[2m14:14:21[22m [34m[200][39m /hub/ [2m8ms[22m
+[2m14:15:02[22m [34m[watch][39m /src/components/Sidebar.astro?astro&type=style&index=0&lang.css
+[2m14:15:03[22m [34m[200][39m /hub/ [2m10ms[22m
+[2m14:15:14[22m [34m[watch][39m /src/components/Sidebar.astro?astro&type=style&index=0&lang.css
+[2m14:15:14[22m [34m[watch][39m src/components/Sidebar.astro
+[2m14:15:29[22m [34m[watch][39m /src/components/Sidebar.astro?astro&type=style&index=0&lang.css
+[2m14:15:30[22m [34m[200][39m /hub/ [2m8ms[22m
+[2m14:15:35[22m [34m[watch][39m /src/pages/patchnote/[version].astro?astro&type=style&index=0&lang.css
+[2m14:15:36[22m [34m[200][39m /hub/ [2m9ms[22m
+[2m14:15:51[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:15:53[22m [34m[200][39m /hub/ [2m14ms[22m
+[2m14:16:29[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:16:30[22m [34m[200][39m /hub/ [2m8ms[22m
+[2m14:57:47[22m [34m[200][39m /patchnote/ [2m13ms[22m
+[2m14:57:49[22m [34m[200][39m /patchnote/3.4.2/ [2m7ms[22m
+[2m14:57:50[22m [34m[200][39m /patchnote/ [2m9ms[22m
+[2m14:57:55[22m [34m[200][39m /patchnote/3.5.1/ [2m13ms[22m
+[2m14:57:57[22m [34m[200][39m /patchnote/ [2m11ms[22m
+[2m14:59:13[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[33m[1m14:59:14[22m [WARN] [router][39m A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/favicon.ico`.
+
+Possible dynamic routes being matched: src/pages/[collection]/index.astro, src/pages/[collection]/[...slug].astro.
+[2m14:59:28[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:59:29[22m [34m[200][39m /patchnote/ [2m14ms[22m
+[2m15:00:03[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m15:00:04[22m [34m[200][39m /patchnote/ [2m3ms[22m
+[2m15:01:56[22m [34m[200][39m /patchnote/ [2m3ms[22m
+[2m15:01:58[22m [34m[200][39m / [2m12ms[22m
+[2m15:02:26[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m15:02:27[22m [34m[200][39m / [2m12ms[22m
+[2m15:05:11[22m [34m[200][39m /hub/ [2m6ms[22m
+[2m15:09:26[22m [34m[200][39m /patchnote/ [2m6ms[22m
+[2m15:09:37[22m [34m[200][39m /patchnote/3.5.0/ [2m11ms[22m
+[2m15:26:59[22m [34m[200][39m /hub/ [2m4ms[22m
+[2m15:27:04[22m [34m[200][39m / [2m8ms[22m
+[2m15:27:06[22m [34m[200][39m /patchnote/3.5.1/ [2m10ms[22m
+[2m15:27:37[22m [34m[200][39m /patchnote/3.5.1/ [2m7ms[22m
+[2m15:27:39[22m [34m[200][39m /patchnote/ [2m12ms[22m
+[2m15:27:52[22m [34m[200][39m /hub/ [2m5ms[22m
+[2m15:27:54[22m [34m[200][39m / [2m11ms[22m
+[2m15:28:02[22m [34m[200][39m /patchnote/3.5.1/ [2m5ms[22m
+[2m15:28:10[22m [34m[200][39m /patchnote/3.5.1/ [2m14ms[22m
+[2m15:28:13[22m [34m[200][39m /patchnote/3.5.1/ [2m7ms[22m
+[2m15:28:17[22m [34m[200][39m /patchnote/3.5.1/ [2m11ms[22m
+[2m15:28:25[22m [34m[200][39m / [2m7ms[22m
+[2m15:29:46[22m [34m[watch][39m src/pages/index.astro
+[2m15:29:50[22m [34m[200][39m / [2m14ms[22m
+[2m15:30:13[22m [34m[watch][39m src/pages/index.astro
+[2m15:30:14[22m [34m[200][39m / [2m18ms[22m
+[2m15:30:17[22m [34m[200][39m /patchnote/ [2m11ms[22m
+[2m15:31:40[22m [34m[200][39m / [2m11ms[22m
+[2m15:31:41[22m [34m[200][39m /patchnote/ [2m8ms[22m
+[2m15:33:14[22m [34m[200][39m / [2m7ms[22m
+[2m15:33:15[22m [34m[200][39m /patchnote/ [2m12ms[22m
+[2m15:33:25[22m [34m[200][39m /patchnote/ [2m11ms[22m
+[2m15:33:27[22m [34m[200][39m /patchnote/ [2m8ms[22m
+[2m15:33:30[22m [34m[200][39m /patchnote/ [2m11ms[22m
+[2m15:35:41[22m [34m[200][39m / [2m8ms[22m
+[2m15:37:23[22m [34m[content][39m Syncing content
+[2m15:37:23[22m [34m[content][39m Content config changed
+[2m15:37:23[22m [34m[content][39m Clearing content store
+[2m15:37:25[22m [34m[content][39m Synced content
+[2m15:37:28[22m [34m[200][39m / [2m70ms[22m
+[2m15:37:34[22m [34m[content][39m Syncing content
+[2m15:37:34[22m [34m[content][39m Content config changed
+[2m15:37:34[22m [34m[content][39m Clearing content store
+[2m15:37:37[22m [34m[content][39m Synced content
+[2m15:37:38[22m [34m[200][39m / [2m58ms[22m
+[2m15:37:42[22m [34m[content][39m Syncing content
+[2m15:37:42[22m [34m[content][39m Content config changed
+[2m15:37:42[22m [34m[content][39m Clearing content store
+[2m15:37:45[22m [34m[content][39m Synced content
+[2m15:37:46[22m [34m[200][39m / [2m60ms[22m
+[2m15:38:10[22m [34m[200][39m /hub/ [2m7ms[22m
+[2m15:38:11[22m [34m[200][39m /patchnote/ [2m9ms[22m
+[2m15:38:13[22m [34m[200][39m / [2m12ms[22m
+[2m15:38:14[22m [34m[200][39m /patchnote/ [2m7ms[22m
+[2m15:38:28[22m [34m[watch][39m /src/pages/patchnote/[version].astro?astro&type=style&index=0&lang.css
+[2m15:38:29[22m [34m[200][39m /patchnote/ [2m7ms[22m
+[2m15:39:08[22m [34m[200][39m / [2m8ms[22m
+[2m15:40:04[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m15:40:05[22m [34m[200][39m / [2m16ms[22m
+[2m15:41:07[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m15:41:08[22m [34m[200][39m / [2m15ms[22m
+[2m15:43:02[22m [34m[200][39m /hub/ [2m11ms[22m
+[2m15:43:05[22m [34m[200][39m /system/ [2m15ms[22m
+[2m18:18:53[22m [34m[watch][39m /src/pages/patchnote.astro?astro&type=style&index=0&lang.css
+[2m14:16:56[22m [34m[watch][39m src/pages/index.astro
+[2m14:18:56[22m [34m[watch][39m src/pages/index.astro
+[2m14:20:47[22m [34m[watch][39m src/pages/index.astro
+[2m14:22:29[22m [34m[watch][39m src/pages/index.astro
+[2m16:55:02[22m [34m[glob-loader][39m Reloaded data from [32mClothing.md[39m
+[2m16:55:02[22m [34m[glob-loader][39m Reloaded data from [32mD-Ark.md[39m
+[2m16:55:02[22m [34m[glob-loader][39m Reloaded data from [32mDeck.md[39m
+[2m16:55:02[22m [34m[glob-loader][39m Reloaded data from [32mFanglongmon.md[39m
+[2m16:55:03[22m [34m[glob-loader][39m Reloaded data from [32mGoggles.md[39m
+[2m16:55:03[22m [34m[glob-loader][39m Reloaded data from [32mguide.md[39m
+[2m16:55:03[22m [34m[glob-loader][39m Reloaded data from [32mKeyRing.md[39m
+[2m16:55:03[22m [34m[glob-loader][39m Reloaded data from [32mSpiral-gear.md[39m
+[2m16:55:03[22m [34m[glob-loader][39m Reloaded data from [32mTrue-Vice.md[39m
+[2m16:55:04[22m [34m[glob-loader][39m Reloaded data from [32mNovice-Challenge.md[39m
+[2m16:55:04[22m [34m[glob-loader][39m Reloaded data from [32mTamer.md[39m
+[2m16:55:04[22m [34m[glob-loader][39m Reloaded data from [32mtestnet.md[39m
+[2m16:55:04[22m [34m[glob-loader][39m Reloaded data from [32mpatch3.5.0.md[39m
+[2m16:55:04[22m [34m[glob-loader][39m Reloaded data from [32mspirit-system.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mLate-Game/Front-Yard-Marionette-Mansion.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mLate-Game/Marine-Dragon-Domain.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mMid-Game/Arena.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mMid-Game/Berserk-Arena.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mMid-Game/Fanglongmon-DG.md[39m
+[2m16:55:05[22m [34m[glob-loader][39m Reloaded data from [32mMid-Game/Vikalaramon.md[39m
+[2m17:01:20[22m [34m[watch][39m /src/pages/hub.astro?astro&type=style&index=0&lang.css
+[2m17:03:07[22m [34m[watch][39m /src/pages/hub.astro?astro&type=style&index=0&lang.css
+[2m18:11:50[22m [34m[glob-loader][39m Reloaded data from [32mtest.md[39m
+[2m01:25:08[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:25:12[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:25:12[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:25:17[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:25:17[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:25:45[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:25:45[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:01[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:01[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:03[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:03[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:07[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:07[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:09[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:09[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:10[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:10[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:30[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:30[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:43[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:43[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:26:44[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:26:44[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:33:40[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:33:40[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:33:42[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:33:42[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:33:44[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:33:44[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:33:46[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:33:46[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[2m01:33:51[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:35:14[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:35:14[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:35:56[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:35:56[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:35:57[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:35:57[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:35:59[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:35:59[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:36:59[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:36:59[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:37:02[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:37:02[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:37:03[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:37:03[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:37:20[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:37:20[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:37:42[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:37:42[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:37:44[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:37:44[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:38:30[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:38:30[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:38:39[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:38:39[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:38:50[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:38:50[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[2m01:38:54[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:38:57[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:38:57[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:01[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:01[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:03[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:03[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:07[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:07[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[2m01:39:16[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:21[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:21[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:44[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:44[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m01:39:46[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m01:39:46[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m02:16:30[22m [WARN] [glob-loader][39m Duplicate id "clothing" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Clothing.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:30[22m [34m[glob-loader][39m Reloaded data from [32mClothing.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "d-ark" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\D-Ark.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:31[22m [34m[glob-loader][39m Reloaded data from [32mD-Ark.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "goggles" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Goggles.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:31[22m [34m[glob-loader][39m Reloaded data from [32mGoggles.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "attribute" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\attribute.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:31[22m [34m[glob-loader][39m Reloaded data from [32mattribute.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "spiral-gear" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Spiral-gear.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:31[22m [34m[glob-loader][39m Reloaded data from [32mSpiral-gear.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "true-vice" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\True-Vice.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:31[22m [34m[glob-loader][39m Reloaded data from [32mTrue-Vice.md[39m
+[33m[1m02:16:31[22m [WARN] [glob-loader][39m Duplicate id "novice-challenge" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Novice-Challenge.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mNovice-Challenge.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "tamer" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Tamer.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mTamer.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "testnet" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\testnet.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mtestnet.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "alphamon-ouryuken-x" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\alphamon-ouryuken-x.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32malphamon-ouryuken-x.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "jetmervamon" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\jetmervamon.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mjetmervamon.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "omegamon-alter-b" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\omegamon-alter-b.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32momegamon-alter-b.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "omegamon-x" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\omegamon-x.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32momegamon-x.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "slashangemon" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\slashangemon.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mslashangemon.md[39m
+[33m[1m02:16:32[22m [WARN] [glob-loader][39m Duplicate id "spirit-system" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\spirit-system.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:32[22m [34m[glob-loader][39m Reloaded data from [32mspirit-system.md[39m
+[33m[1m02:16:33[22m [WARN] [glob-loader][39m Duplicate id "late-game/front-yard-marionette-mansion" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\dungeon\Late-Game\Front-Yard-Marionette-Mansion.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:33[22m [34m[glob-loader][39m Reloaded data from [32mLate-Game/Front-Yard-Marionette-Mansion.md[39m
+[33m[1m02:16:33[22m [WARN] [glob-loader][39m Duplicate id "late-game/marine-dragon-domain" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\dungeon\Late-Game\Marine-Dragon-Domain.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:33[22m [34m[glob-loader][39m Reloaded data from [32mLate-Game/Marine-Dragon-Domain.md[39m
+[33m[1m02:16:33[22m [WARN] [glob-loader][39m Duplicate id "mid-game/berserk-arena" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\dungeon\Mid-Game\Berserk-Arena.md. Later items with the same id will overwrite earlier ones.
+[2m02:16:33[22m [34m[glob-loader][39m Reloaded data from [32mMid-Game/Berserk-Arena.md[39m
+[33m[1m02:17:57[22m [WARN] [glob-loader][39m Duplicate id "clothing" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Clothing.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:57[22m [34m[glob-loader][39m Reloaded data from [32mClothing.md[39m
+[33m[1m02:17:57[22m [WARN] [glob-loader][39m Duplicate id "d-ark" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\D-Ark.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:57[22m [34m[glob-loader][39m Reloaded data from [32mD-Ark.md[39m
+[33m[1m02:17:57[22m [WARN] [glob-loader][39m Duplicate id "novice-challenge" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Novice-Challenge.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:58[22m [34m[glob-loader][39m Reloaded data from [32mNovice-Challenge.md[39m
+[33m[1m02:17:58[22m [WARN] [glob-loader][39m Duplicate id "goggles" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Goggles.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:58[22m [34m[glob-loader][39m Reloaded data from [32mGoggles.md[39m
+[33m[1m02:17:58[22m [WARN] [glob-loader][39m Duplicate id "guide" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\guide.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:58[22m [34m[glob-loader][39m Reloaded data from [32mguide.md[39m
+[33m[1m02:17:58[22m [WARN] [glob-loader][39m Duplicate id "keyring" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\KeyRing.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:58[22m [34m[glob-loader][39m Reloaded data from [32mKeyRing.md[39m
+[33m[1m02:17:58[22m [WARN] [glob-loader][39m Duplicate id "testnet" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\testnet.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:58[22m [34m[glob-loader][39m Reloaded data from [32mtestnet.md[39m
+[33m[1m02:17:59[22m [WARN] [glob-loader][39m Duplicate id "spirit-system" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\digimon\spirit-system.md. Later items with the same id will overwrite earlier ones.
+[2m02:17:59[22m [34m[glob-loader][39m Reloaded data from [32mspirit-system.md[39m
+[33m[1m02:35:12[22m [WARN] [glob-loader][39m Duplicate id "clothing" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\accessories\Clothing.md. Later items with the same id will overwrite earlier ones.
+[2m02:35:12[22m [34m[glob-loader][39m Reloaded data from [32mClothing.md[39m
+[2m02:37:40[22m Configuration file updated. Restarting...
+[2m02:37:41[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:37:48[22m [34m[content][39m Syncing content
+[2m02:37:48[22m [34m[content][39m Astro config changed
+[2m02:37:48[22m [34m[content][39m Clearing content store
+[2m02:37:52[22m [34m[content][39m Synced content
+[2m02:37:52[22m [34m[types][39m Generated [2m11.75s[22m
+[33m[1m02:38:02[22m [WARN] [glob-loader][39m Duplicate id "novice-challenge" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Novice-Challenge.md. Later items with the same id will overwrite earlier ones.
+[2m02:38:02[22m [34m[glob-loader][39m Reloaded data from [32mNovice-Challenge.md[39m
+[2m02:40:41[22m [34m[glob-loader][39m Reloaded data from [32mNovice-Challenge.md[39m
+[2m02:41:10[22m Configuration file updated. Restarting...
+[2m02:44:29[22m Configuration file removed. Restarting...
+[2m02:44:29[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m02:44:31[22m [34m[content][39m Syncing content
+[2m02:44:35[22m [34m[content][39m Synced content
+[2m02:44:35[22m [34m[types][39m Generated [2m5.66s[22m
+[2m03:31:03[22m [34m[200][39m / [2m48ms[22m
+[2m03:31:26[22m Configuration file added. Restarting...
+[2m03:31:26[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m03:31:28[22m [34m[content][39m Syncing content
+[2m03:31:31[22m [34m[content][39m Synced content
+[2m03:31:31[22m [34m[types][39m Generated [2m4.93s[22m
+[33m[1m03:44:51[22m [WARN] [glob-loader][39m Duplicate id "tamer" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Tamer.md. Later items with the same id will overwrite earlier ones.
+[2m03:44:51[22m [34m[glob-loader][39m Reloaded data from [32mTamer.md[39m
+[33m[1m03:48:07[22m [WARN] [glob-loader][39m Duplicate id "tamer" found in C:\Users\hhhhhhhhhhhhhhhhhhhh\Desktop\project\digimon-app\src\content\system\Tamer.md. Later items with the same id will overwrite earlier ones.
+[2m03:48:07[22m [34m[glob-loader][39m Reloaded data from [32mTamer.md[39m

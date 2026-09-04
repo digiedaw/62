@@ -1,0 +1,163 @@
+﻿---
+/**
+ * PATCH NOTES — every balance change and content drop for DMW.
+ * Auto-collected from src/content/patchnote/ (newest first).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('patchnote');
+const patches = [...entries].sort(
+  (a, b) => +new Date(b.data.date) - +new Date(a.data.date)
+);
+
+const fmtDate = (d: string | Date) => {
+  const date = typeof d === 'string' ? new Date(d) : d;
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+};
+---
+
+<BaseLayout
+  title="Patch Notes — DIGIWIKI"
+  description="Full patch history for Digital Masters World — every balance change, hotfix and content drop."
+>
+  <div class="page-grid">
+    <Sidebar collection="patchnote" />
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/hub/">← All Entries</a> <span>/</span> <span class="here">Patch Notes</span>
+      </nav>
+      <h1>Patch Notes</h1>
+      <p class="muted">{patches.length} entries · full patch history</p>
+
+      <div class="card-grid">
+        {
+          patches.map((p) => (
+            <a class="card panel" href={`/patchnote/${p.id}/`} data-type={p.data.type ?? ''}>
+              <span class="card-icon" aria-hidden="true">{p.data.emoji ?? '📝'}</span>
+              <div class="card-body">
+                <h2>
+                  {p.data.title}
+                  {p.data.type && (
+                    <span class={`type type-${String(p.data.type).toLowerCase()}`}>
+                      {p.data.type}
+                    </span>
+                  )}
+                </h2>
+                <p class="card-date">{fmtDate(p.data.date)}</p>
+                <p class="card-summary">{p.data.summary}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      {patches.length === 0 && (
+        <p class="empty panel">No patch notes yet — check back after the next update.</p>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .crumbs {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--accent); }
+  .crumbs .here { color: var(--accent-2); }
+  .crumbs span { margin: 0 0.35rem; }
+
+  h1 {
+    margin: 0 0 0.2rem;
+    border: none;
+    padding: 0;
+  }
+  .muted {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.1rem;
+  }
+  .card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 1.15rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-1px);
+  }
+  .card:hover h2 { color: var(--accent); }
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+  }
+  .card-body { min-width: 0; flex: 1; }
+  .card-body h2 {
+    margin: 0 0 0.2rem;
+    padding: 0;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .card-date {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .card-summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .type {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .type-major {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .type-hotfix { color: var(--muted); }
+  .empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+/**
+ * GLOBAL SIDEBAR — collects every registered section automatically.
+ *
+ * You should normally NEVER edit this file:
+ *   • new/renamed items, groups or whole sections → see src/lib/navigation.ts
+ *
+ * How it works:
+ *   1. Loops over SIDEBAR_SECTIONS (src/lib/navigation.ts)
+ *   2. Pulls every entry of each collection via getCollection()
+ *   3. Groups entries by each section's `groupField` frontmatter value
+ *      (e.g. `stage`, `category`) — NEW VALUES APPEAR AUTOMATICALLY,
+ *      appended after the preferred order.
+ */
+import { getCollection } from 'astro:content';
+import EntryIcon from './EntryIcon.astro';
+import data from '../data/homepage.json';
+import {
+  SIDEBAR_SECTIONS,
+  getAutoSections,
+  getSectionByCollection,
+  buildNavSection,
+  type SidebarSection,
+} from '../lib/navigation';
+
+interface Props {
+  /** Show only this collection's section (e.g. "digimon"). Omit = all. */
+  collection?: string;
+  /** Special mode: render only the patch notes list (independent of any collection). */
+  mode?: 'default' | 'patchnote';
+}
+
+// Per-category mode: <Sidebar collection="digimon" /> shows one section.
+// Patch-note mode: <Sidebar mode="patchnote" /> shows only the patch list.
+const requested = Astro.props.collection as string | undefined;
+const mode = Astro.props.mode ?? 'default';
+
+const allSections = (
+  requested
+    ? [getSectionByCollection(requested)]
+    : [...SIDEBAR_SECTIONS, ...getAutoSections()]
+).filter((s): s is SidebarSection => Boolean(s));
+
+const sections = await Promise.all(
+  allSections.map(async (section) =>
+    buildNavSection(
+      section,
+      await getCollection(
+        section.collection as Parameters<typeof getCollection>[0]
+      )
+    )
+  )
+);
+
+// Patch list — sourced from homepage.json, independent of the system collection
+const patchSlug = (v: string) =>
+  v.toLowerCase().replace(/^patch\s+/, '').replace(/\s+/g, '-');
+const patches = (data.patches ?? []).slice().reverse(); // newest first
+
+const here = Astro.url.pathname.replace(/\/+$/, '');
+const isActive = (href: string): boolean => here === href.replace(/\/+$/, '');
+---
+
+<aside class="panel sidebar">
+  <a class="hub-link" href="/hub/">← All Entries</a>
+  <h2>Browse</h2>
+
+  {
+    mode === 'patchnote' ? (
+      <nav class="section" aria-label="Patch Notes">
+        <a
+          class:list={['all-link', { current: isActive('/patchnote/') }]}
+          href="/patchnote/"
+        >
+          📝 All Patches ({patches.length})
+        </a>
+        <h3>
+          Latest <span class="g-count">{patches.length}</span>
+        </h3>
+        <ul>
+          {patches.map((p) => {
+            const href = `/patchnote/${patchSlug(p.version)}/`;
+            return (
+              <li>
+                <a
+                  href={href}
+                  aria-current={isActive(href) ? 'page' : undefined}
+                >
+                  <span class="patch-emoji" aria-hidden="true">
+                    {p.emoji ?? '📝'}
+                  </span>{' '}
+                  {p.version}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    ) : (
+      sections.map((section) => (
+        <nav class="section" aria-label={section.label}>
+          <a
+            class:list={['all-link', { current: isActive(section.href) }]}
+            href={section.href}
+          >
+            📖 {section.label} ({section.total})
+          </a>
+
+          {section.groups.map((group) => (
+            <>
+              <h3>
+                {group.label} <span class="g-count">{group.count}</span>
+              </h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                    >
+                      <EntryIcon name={item.icon} emoji={item.emoji} />{' '}
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
+        </nav>
+      ))
+    )
+  }
+</aside>
+
+<style>
+  .sidebar h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    padding: 0;
+  }
+  .section + .section {
+    margin-top: 1.25rem;
+  }
+  .sidebar h3 {
+    margin: 1.25rem 0 0.35rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-2);
+    border: none;
+    padding: 0;
+  }
+  .g-count {
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  .hub-link {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    padding: 0.15rem 0.55rem 0.45rem;
+  }
+  .hub-link:hover { color: var(--accent); }
+  .all-link {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 8px;
+  }
+  .all-link.current,
+  .all-link:hover {
+    background: var(--panel-2);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li a {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--muted);
+    padding: 0.28rem 0.55rem;
+    border-radius: 8px;
+    border-left: 2px solid transparent;
+  }
+  li a:hover {
+    color: var(--accent);
+    background: var(--panel-2);
+  }
+  li a[aria-current='page'] {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--panel-2);
+  }
+  .patch-emoji {
+    display: inline-block;
+    width: 1.1em;
+    text-align: center;
+    margin-right: 0.1rem;
+  }
+</style>

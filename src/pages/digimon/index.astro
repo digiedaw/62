@@ -1,0 +1,217 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import WikiCard from '../../components/WikiCard.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('digimon');
+
+// Fixed filter taxonomies (game-style tiers)
+const ranks = ['SSS+', 'SSS', 'U'];
+const attributeOptions = ['Vaccine', 'Virus', 'Data'];
+const typeOptions = ['Autoattack', 'Skill', 'Tank'];
+
+// Main listing groups by RANK (matching the sidebar): SSS+ -> SSS -> U
+const groups = [
+  ...ranks.map((rank) => ({
+    label: rank,
+    items: entries
+      .filter((e) => e.data.rank === rank)
+      .sort((a, b) => a.data.order - b.data.order),
+  })),
+  {
+    label: 'Unclassified',
+    items: entries
+      .filter((e) => !e.data.rank)
+      .sort((a, b) => a.data.title.localeCompare(b.data.title)),
+  },
+].filter((group) => group.items.length > 0);
+---
+
+<BaseLayout
+  title="All Entries — DIGIWIKI"
+  description="All Digimon entries — grouped and filterable by rank (SSS+/SSS/U), attribute and type."
+>
+  <div class="page-grid">
+    <Sidebar collection="digimon" />
+    <div>
+      <p class="back"><a href="/hub/">← All Entries</a></p>
+      <h1>All Entries</h1>
+      <p class="muted">
+        {entries.length} pages · grouped by rank
+      </p>
+
+      <!-- Filter bar -->
+      <div class="filters panel">
+        <label>
+          Rank
+          <select id="f-rank">
+            <option value="">All</option>
+            {ranks.map((rank) => (
+              <option value={rank}>{rank}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Attribute
+          <select id="f-attribute">
+            <option value="">All</option>
+            {attributeOptions.map((attribute) => (
+              <option value={attribute}>{attribute}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Type
+          <select id="f-type">
+            <option value="">All</option>
+            {typeOptions.map((type) => (
+              <option value={type}>{type}</option>
+            ))}
+          </select>
+        </label>
+
+        <button id="f-reset" class="btn" type="button">✕ Reset</button>
+        <p id="f-count" class="f-count muted" aria-live="polite"></p>
+      </div>
+
+      {
+        groups.map((group) => (
+          <section data-group={group.label}>
+            <h2>
+              {group.label} <span class="count">{group.items.length}</span>
+            </h2>
+            <div class="card-grid">
+              {group.items.map((entry) => (
+                <div
+                  class="cell"
+                  data-rank={entry.data.rank ?? ''}
+                  data-attribute={entry.data.attribute ?? ''}
+                  data-role={entry.data.role ?? ''}
+                >
+                  <WikiCard entry={entry} />
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const rankSelect = document.getElementById('f-rank') as HTMLSelectElement;
+  const attributeSelect = document.getElementById('f-attribute') as HTMLSelectElement;
+  const typeSelect = document.getElementById('f-type') as HTMLSelectElement;
+  const resetBtn = document.getElementById('f-reset');
+  const countEl = document.getElementById('f-count');
+
+  const cells = Array.from(document.querySelectorAll<HTMLElement>('.cell'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('section[data-group]'));
+
+  function applyFilters(): void {
+    const rank = rankSelect.value;
+    const attribute = attributeSelect.value;
+    const type = typeSelect.value;
+
+    let visible = 0;
+
+    for (const cell of cells) {
+      const show =
+        (!rank || cell.dataset.rank === rank) &&
+        (!attribute || cell.dataset.attribute === attribute) &&
+        (!type || cell.dataset.role === type);
+
+      cell.hidden = !show;
+      if (show) visible++;
+    }
+
+    // Hide whole stage sections that ended up empty
+    for (const section of sections) {
+      const anyVisible = Array.from(
+        section.querySelectorAll<HTMLElement>('.cell')
+      ).some((cell) => !cell.hidden);
+      section.hidden = !anyVisible;
+    }
+
+    if (countEl) {
+      countEl.textContent = `${visible} of ${cells.length} entries match`;
+    }
+  }
+
+  for (const select of [rankSelect, attributeSelect, typeSelect]) {
+    select.addEventListener('change', applyFilters);
+  }
+
+  resetBtn?.addEventListener('click', () => {
+    for (const select of [rankSelect, attributeSelect, typeSelect]) {
+      select.value = '';
+    }
+    applyFilters();
+  });
+
+  applyFilters();
+</script>
+
+<style>
+  .count {
+    font-size: 0.8rem;
+    color: var(--accent);
+    vertical-align: middle;
+  }
+
+  /* ---- filter bar ---- */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    margin: 1.25rem 0 2rem;
+  }
+  .filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .filters select {
+    min-width: 150px;
+    padding: 0.5rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .filters select:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(41, 241, 156, 0.15);
+  }
+  .filters .btn {
+    align-self: flex-end;
+  }
+  .f-count {
+    margin: 0 0 0 auto;
+    align-self: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  /* ---- filterable cards ---- */
+  .cell {
+    display: flex;
+  }
+  .cell :global(.card) {
+    width: 100%;
+  }
+</style>

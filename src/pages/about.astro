@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About & Contributing — DIGIWIKI"
+  description="How this wiki works and how to add your own pages."
+>
+  <div class="wrap prose">
+    <h1>About this wiki</h1>
+    <p>
+      DIGIWIKI is a static site built with <a href="https://astro.build">Astro</a>.
+      Every page is a plain <strong>Markdown file</strong>; Astro turns them into
+      fast HTML pages with validated frontmatter, automatic sidebar grouping,
+      prev/next links and an offline-capable search index.
+    </p>
+
+    <h2>Add a new page in 30 seconds</h2>
+    <ol>
+      <li>Create a file in <code>src/content/digimon/</code> — its name becomes the URL
+        (e.g. <code>biyomon.md</code> → <code>/wiki/biyomon</code>).</li>
+      <li>Paste the frontmatter below and fill it in.</li>
+      <li>Write the body in normal Markdown.</li>
+      <li>Save. The page instantly appears in the sidebar, the All Entries page,
+        the search index, and gets prev/next links.</li>
+    </ol>
+
+    <pre><code>{`---
+title: "Biyomon"
+emoji: "🐦"
+stage: "Rookie"           # Fresh | In-Training | Rookie | Champion | Ultimate | Mega
+rank: "SSS"               # SSS+ | SSS | U
+attribute: "Vaccine"      # Vaccine | Virus | Data
+role: "Skill"             # Autoattack | Skill | Tank
+partner: "Sora Takenouchi"
+description: "A bird Digimon whose wings have degenerated…"
+tags: ["adventure", "partner"]
+order: 20                 # position in lists / prev-next flow
+---
+
+## Overview
+
+Anything you write here is rendered as rich Markdown.`}</code></pre>
+
+    <h2>Frontmatter fields</h2>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Required</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>title</code></td><td>✅</td><td>Page name everywhere on the site</td></tr>
+        <tr><td><code>emoji</code></td><td>—</td><td>Avatar shown on cards/sidebar (default 🥚)</td></tr>
+        <tr><td><code>stage</code></td><td>—</td><td>Evolution stage used for grouping</td></tr>
+        <tr><td><code>rank</code></td><td>—</td><td>Rarity rank: SSS+ / SSS / U</td></tr>
+        <tr><td><code>attribute</code></td><td>—</td><td>Vaccine / Virus / Data</td></tr>
+        <tr><td><code>role</code></td><td>—</td><td>Combat type: Autoattack / Skill / Tank</td></tr>
+        <tr><td><code>partner</code></td><td>—</td><td>Human partner, if any</td></tr>
+        <tr><td><code>description</code></td><td>✅</td><td>Short summary for cards + search</td></tr>
+        <tr><td><code>tags</code></td><td>—</td><td>List of free-form keywords</td></tr>
+        <tr><td><code>order</code></td><td>—</td><td>Sort position (default 99)</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">
+      Invalid frontmatter fails the build with a helpful error — that's the content
+      collection schema keeping the wiki consistent.
+    </p>
+
+    <h2>Re-theming</h2>
+    <p>
+      The whole look lives in <code>src/styles/global.css</code> under
+      <code>:root</code> — swap <code>--bg</code>, <code>--accent</code>,
+      <code>--accent-2</code> etc. and the entire site reskins itself.
+    </p>
+
+    <h2>Accessories collection</h2>
+    <p>
+      Gear lives in <code>src/content/accessories/</code> and appears at
+      <code>/accessories</code> with its own sidebar, category filter and detail
+      pages. Frontmatter:
+    </p>
+
+    <pre><code>{`---
+title: "Taichi's Goggles"
+emoji: "🥽"
+category: "Goggles"   # Goggles | Digivice | Equipment | Cloth
+owner: "Tai Kamiya"   # optional
+description: "Short summary for cards & search."
+tags: ["goggles"]
+order: 10             # position within its category
+---`}</code></pre>
+
+    <blockquote>
+      <strong>Note:</strong> Digimon™ is a trademark of Bandai / Akiyoshi Hongo.
+      This is an unofficial, non-commercial fan project for learning purposes.
+    </blockquote>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 800px;
+    margin-inline: auto;
+    padding: 2.5rem 0 4rem;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+/**
+ * GENERIC category landing page for AUTO-DISCOVERED collections
+ * (src/content/<folder>/ without a dedicated route).
+ * Gives every hub card a real "view all" target: /<collection>/
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import EntryIcon from '../../components/EntryIcon.astro';
+import { getCollection } from 'astro:content';
+import {
+  getAutoCollectionNames,
+  getSectionByCollection,
+  buildNavSection,
+} from '../../lib/navigation';
+
+export async function getStaticPaths() {
+  return getAutoCollectionNames().map((collection) => ({
+    params: { collection },
+  }));
+}
+
+const { collection } = Astro.params;
+const section = getSectionByCollection(collection)!;
+const entries = await getCollection(
+  collection as Parameters<typeof getCollection>[0]
+);
+const nav = buildNavSection(section, entries);
+---
+
+<BaseLayout
+  title={`${section.label} — DIGIWIKI`}
+  description={section.blurb ?? `All ${section.label} entries.`}
+>
+  <div class="page-grid">
+    <Sidebar collection={collection} />
+    <div>
+      <p class="back"><a href="/hub/">← All Entries</a></p>
+      <h1>{section.label}</h1>
+      <p class="muted">
+        {nav.total} pages · grouped by category
+      </p>
+
+      {
+        nav.groups.map((group) => (
+          <section data-group={group.label}>
+            <h2>
+              {group.label} <span class="count">{group.count}</span>
+            </h2>
+            <div class="card-grid">
+              {group.items.map((item) => (
+                <a class="g-card panel" href={item.href}>
+                  <span class="g-icon" aria-hidden="true">
+                    <EntryIcon name={item.icon} emoji={item.emoji} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  {item.description && <p>{item.description}</p>}
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .count {
+    font-size: 0.8rem;
+    color: var(--accent);
+    vertical-align: middle;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .g-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    color: var(--text);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .g-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-2px);
+  }
+  .g-card:hover h3 {
+    color: var(--accent);
+  }
+  .g-icon {
+    font-size: 1.4rem;
+  }
+  .g-card h3 {
+    margin: 0;
+    border: none;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .g-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+</style>

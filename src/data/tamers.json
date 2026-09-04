@@ -1,0 +1,522 @@
+[
+  {
+    "slug": "yoshino",
+    "name": "Yoshino Fujieda",
+    "emoji": "🧑",
+    "image": "tamers/Yoshino.png",
+    "role": "Skill DPS",
+    "tagline": "Friendship and Focus from the Data Squad.",
+    "overview": "Yoshino is one of the strongest starter Tamers. Her Tamer Skill Protection is one of the best defensive cooldowns available early and can save you from otherwise fatal mechanics.",
+    "activeSkill": {
+      "name": "Protection",
+      "icon": "tamers/skills/Protection.png",
+      "description": "Grants a temporary shield that prevents fatal hits during raid boss mechanics."
+    },
+    "passiveSkills": [
+      {
+        "name": "Keenan",
+        "icon": "tamers/passives/PassiveKeenan.png",
+        "description": "Slightly increases Critical Rate and helps Skill"
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "keenan",
+    "name": "Keenan Crier",
+    "emoji": "🧑",
+    "image": "tamers/Keenan.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Courage from the Data Squad.",
+    "overview": "Keenan is a top pick for AA-focused players. His Tamer Skill Shock grants additional Critical Damage, making him the strongest early-game Tamer for sustained auto-attack builds.",
+    "activeSkill": {
+      "name": "Shock",
+      "icon": "tamers/skills/Shock.png",
+      "description": "Boosts Critical Damage for your next few attacks."
+    },
+    "passiveSkills": [
+      {
+        "name": "Keenan",
+        "icon": "tamers/passives/PassiveKeenan.png",
+        "description": "Slightly increases Critical Rate and helps Skill DPS tamers land burst windows more consistently."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  },
+  {
+    "slug": "taichi",
+    "name": "Taichi Yagami",
+    "emoji": "🧑",
+    "image": "tamers/Taichi.png",
+    "role": "All-rounder",
+    "tagline": "Courage of the Crest of Courage.",
+    "overview": "Taichi is the most iconic DigiDestined and a flexible Tamer who works with both Skill and Auto Attack builds. His balanced skill kit makes him a great choice for new players learning the game.",
+    "activeSkill": {
+      "name": "Vigor",
+      "icon": "tamers/skills/Vigor.png",
+      "description": "Temporarily increases ATK for the Tamer and the active Digimon."
+    },
+    "passiveSkills": [
+      {
+        "name": "Taichi",
+        "icon": "tamers/passives/PassiveTaichi.png",
+        "description": "When the partner Digimon would faint, it survives with 1 HP once per battle."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "matt",
+    "name": "Matt Ishida",
+    "emoji": "🧑",
+    "image": "tamers/Matt.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Courage of the Crest of Friendship.",
+    "overview": "Matt excels with the Garurumon line and the Auto Attack archetype. His passive boosts synergize with fast, multi-hit Digimon.",
+    "activeSkill": {
+      "name": "Bash",
+      "icon": "tamers/skills/Bash.png",
+      "description": "Deals a heavy strike that staggers the target."
+    },
+    "passiveSkills": [
+      {
+        "name": "Matt",
+        "icon": "tamers/passives/PassiveMatt.png",
+        "description": "Boosts damage when paired with a Garurumon-line partner."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "sora",
+    "name": "Sora Takenouchi",
+    "emoji": "🧑",
+    "image": "tamers/Sora.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Courage of the Crest of Love.",
+    "overview": "Sora is a strong Auto Attack Tamer who works well with Bird-type and Lilymon-line Digimon. Her support skills keep her allies in the fight longer.",
+    "activeSkill": {
+      "name": "Encouragement",
+      "icon": "tamers/skills/Encouragement.png",
+      "description": "Raises the team’s Critical Rate."
+    },
+    "passiveSkills": [
+      {
+        "name": "Sora",
+        "icon": "tamers/passives/PassiveSora.png",
+        "description": "Boosts healing and support effectiveness for the team."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "izzy",
+    "name": "Izzy Izumi",
+    "emoji": "🧑",
+    "image": "tamers/Izzy.png",
+    "role": "Support",
+    "tagline": "Knowledge of the Crest of Knowledge.",
+    "overview": "Izzy brings utility and resource management. His passive Analytical Mind helps new players level up faster, and his active Overclock reduces skill cooldowns.",
+    "activeSkill": {
+      "name": "Analysis",
+      "icon": "tamers/skills/Analysis.png",
+      "description": "Reduces cooldowns on your Digimon’s skills."
+    },
+    "passiveSkills": [
+      {
+        "name": "Izzy",
+        "icon": "tamers/passives/PassiveIzzy.png",
+        "description": "Slightly increases EXP gain from defeated Digimon."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "kari",
+    "name": "Kari Kamiya",
+    "emoji": "🧑",
+    "image": "tamers/Kari.png",
+    "role": "Support",
+    "tagline": "Light of the Crest of Light.",
+    "overview": "Kari is a Support-focused Tamer who pairs well with Holy and Light-attribute Digimon. Her team-wide buffs amplify everyone’s damage.",
+    "activeSkill": {
+      "name": "Pray",
+      "icon": "tamers/skills/Pray.png",
+      "description": "Heals a portion of HP and grants a small damage boost."
+    },
+    "passiveSkills": [
+      {
+        "name": "Hikari",
+        "icon": "tamers/passives/PassiveHikari.png",
+        "description": "Increases damage of Light-attribute Digimon in your party."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  },
+  {
+    "slug": "takeru",
+    "name": "Takeru Takaishi",
+    "emoji": "🧑",
+    "image": "tamers/Takeru.png",
+    "role": "Skill DPS",
+    "tagline": "Hope of the Crest of Hope.",
+    "overview": "Takeru is a Skill DPS-oriented Tamer with strong synergy to Holy and Light Digimon like Patamon’s evolution line.",
+    "activeSkill": {
+      "name": "Focus",
+      "icon": "tamers/skills/Focus.png",
+      "description": "Boosts the next skill’s damage."
+    },
+    "passiveSkills": [
+      {
+        "name": "Takeru",
+        "icon": "tamers/passives/PassiveTakeru.png",
+        "description": "Adds a small Light-attribute damage bonus to all attacks."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "henry",
+    "name": "Henry Wong",
+    "emoji": "🧑",
+    "image": "tamers/Henry.png",
+    "role": "Support",
+    "tagline": "Reliability of the Crest of Reliability.",
+    "overview": "Henry is a calm, supportive Tamer. His skills focus on keeping the team safe and regenerating resources during long fights.",
+    "activeSkill": {
+      "name": "Guard",
+      "icon": "tamers/skills/Guard.png",
+      "description": "Grants a temporary shield that absorbs damage."
+    },
+    "passiveSkills": [
+      {
+        "name": "Henry",
+        "icon": "tamers/passives/PassiveHenry.png",
+        "description": "Slightly raises MaxHP for the whole team when an ally takes damage."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "marcus",
+    "name": "Marcus Damon",
+    "emoji": "🧑",
+    "image": "tamers/Marcus.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Leadership from the Data Squad.",
+    "overview": "Marcus is the leader of the international DigiDestined and a solid Auto Attack Tamer. He shines in extended fights.",
+    "activeSkill": {
+      "name": "Berserker",
+      "icon": "tamers/skills/Berserker.png",
+      "description": "Boosts ATK at the cost of DEF."
+    },
+    "passiveSkills": [
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team’s ATK by a small amount."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "thomas",
+    "name": "Thomas H. Norstein",
+    "emoji": "🧑",
+    "image": "tamers/Thomas.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Discipline of the Data Squad.",
+    "overview": "Thomas is a precise, calculated Tamer. Strong with Daemon and other Virus-type partners.",
+    "activeSkill": {
+      "name": "Suppression",
+      "icon": "tamers/skills/Suppression.png",
+      "description": "Lowers the target’s ATK for a short duration."
+    },
+    "passiveSkills": [
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer’s effect duration."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "jeri",
+    "name": "Jeri Kato",
+    "emoji": "🧑",
+    "image": "tamers/Jeri.png",
+    "role": "Skill DPS",
+    "tagline": "Light of the Tamers.",
+    "overview": "Jeri focuses on Light and support Digimon. She is a flexible Tamer with both offensive and utility skills.",
+    "activeSkill": {
+      "name": "Insight",
+      "icon": "tamers/skills/Insight.png",
+      "description": "Raises Critical Damage."
+    },
+    "passiveSkills": [
+      {
+        "name": "Jeri",
+        "icon": "tamers/passives/PassiveJeri.png",
+        "description": "Adds a small heal over time effect to Tamer restorative actions."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  },
+  {
+    "slug": "ryo",
+    "name": "Ryo Akiyama",
+    "emoji": "🧑",
+    "image": "tamers/Ryo.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Independence of the Tamers.",
+    "overview": "Ryo is a lone-wolf Tamer with strong offensive options. He pairs best with Cyberdramon and similar Digimon.",
+    "activeSkill": {
+      "name": "Aim",
+      "icon": "tamers/skills/Aim.png",
+      "description": "Increases Critical Rate for the next attack."
+    },
+    "passiveSkills": [
+      {
+        "name": "Ryo",
+        "icon": "tamers/passives/PassiveRyo.png",
+        "description": "Increases damage of your first attack in each combat."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  },
+  {
+    "slug": "joe",
+    "name": "Joe Kido",
+    "emoji": "🧑",
+    "image": "tamers/Joe.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Reliability of the Crest of Reliability.",
+    "overview": "Joe is a calm, supportive Tamer who works well with Gomamon-line and Water-attribute Digimon.",
+    "activeSkill": {
+      "name": "Impregnableness",
+      "icon": "tamers/skills/Impregnableness.png",
+      "description": "Greatly reduces incoming damage for several seconds."
+    },
+    "passiveSkills": [
+      {
+        "name": "Joe",
+        "icon": "tamers/passives/PassiveJoe.png",
+        "description": "Reduces damage taken from Water-attribute enemies."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "mimi",
+    "name": "Mimi Tachikawa",
+    "emoji": "🧑",
+    "image": "tamers/Mimi.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Lightness from the original DigiDestined.",
+    "overview": "Mimi brings her cheerful personality and Pulldown/Tailmon support. She works best with Light-attribute Auto Attack builds.",
+    "activeSkill": {
+      "name": "Cheer",
+      "icon": "tamers/skills/Cheer.jpg",
+      "description": "Increases the team’s ATK for a short duration."
+    },
+    "passiveSkills": [
+      {
+        "name": "Mimi",
+        "icon": "tamers/passives/PassiveMimi.png",
+        "description": "Increases healing received from all sources."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  },
+  {
+    "slug": "hiro",
+    "name": "Hiro Amanokawa",
+    "emoji": "🧑",
+    "image": "tamers/Hiro.png",
+    "role": "Skill DPS",
+    "tagline": "Spirit from Digimon Ghost Game.",
+    "overview": "Hiro is the tamer of Gammamon. He is a flexible Skill DPS Tamer with strong evolution synergy.",
+    "activeSkill": {
+      "name": "Evade",
+      "icon": "tamers/skills/Evade.png",
+      "description": "Temporarily raises your evasion."
+    },
+    "passiveSkills": [
+      {
+        "name": "Hiro",
+        "icon": "tamers/passives/PassiveHiro.png",
+        "description": "Slightly raises Evasion of the active Digimon."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "kyoshiro",
+    "name": "Kyoshiro Kido",
+    "emoji": "🧑",
+    "image": "tamers/Kyoshiro.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Inspiration from Digimon Ghost Game.",
+    "overview": "Kyoshiro is the team leader of the Ghost Game group. He works best with Jellymon and lightning-fast Auto Attack Digimon.",
+    "activeSkill": {
+      "name": "Bash",
+      "icon": "tamers/skills/Bash.png",
+      "description": "Deals a heavy strike that staggers the target."
+    },
+    "passiveSkills": [
+      {
+        "name": "Kyoshiro",
+        "icon": "tamers/passives/PassiveKyoshiro.png",
+        "description": "Adds bonus damage when attacking enemies affected by Thunder."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "rika",
+    "name": "Rika Nonaka",
+    "emoji": "🧑",
+    "image": "tamers/Rika.png",
+    "role": "Auto Attack DPS",
+    "tagline": "Wit from Digimon Tamers.",
+    "overview": "Rika is a sharp, analytical Tamer who excels with Renamon. She has a deep kit of offensive and tactical skills.",
+    "activeSkill": {
+      "name": "Analysis",
+      "icon": "tamers/skills/Analysis.png",
+      "description": "Reduces cooldowns on your Digimon’s skills."
+    },
+    "passiveSkills": [
+      {
+        "name": "Rika",
+        "icon": "tamers/passives/PassiveRika.png",
+        "description": "Small ATK boost when HP is full."
+      },
+      {
+        "name": "Strategy",
+        "icon": "tamers/passives/strategy.png",
+        "description": "Grants a small permanent DEF boost when an ally's HP is low."
+      }
+    ]
+  },
+  {
+    "slug": "ruli",
+    "name": "Ruli Tamashiro",
+    "emoji": "🧑",
+    "image": "tamers/Ruli.png",
+    "role": "Skill DPS",
+    "tagline": "Curiosity from Digimon Ghost Game.",
+    "overview": "Ruli is a curious and determined Tamer. She pairs well with Angoramon and other Spirit Digimon.",
+    "activeSkill": {
+      "name": "Aim",
+      "icon": "tamers/skills/Aim.png",
+      "description": "Increases Critical Rate for the next attack."
+    },
+    "passiveSkills": [
+      {
+        "name": "Ruli",
+        "icon": "tamers/passives/PassiveRuli.png",
+        "description": "Small bonus to Skill Damage when an ally is below 50% HP."
+      },
+      {
+        "name": "Commitment",
+        "icon": "tamers/passives/commitment.png",
+        "description": "Permanently boosts your Tamer's effect duration by a small percentage."
+      }
+    ]
+  },
+  {
+    "slug": "takato",
+    "name": "Takato Matsuki",
+    "emoji": "🧑",
+    "image": "tamers/Takato.png",
+    "role": "Skill DPS",
+    "tagline": "Hope from Digimon Tamers.",
+    "overview": "Takato is the leader of the Tamers and bonds strongly with Guilmon. His skills enhance digivolution and team morale.",
+    "activeSkill": {
+      "name": "Vigor",
+      "icon": "tamers/skills/Vigor.png",
+      "description": "Temporarily increases ATK for the Tamer and the active Digimon."
+    },
+    "passiveSkills": [
+      {
+        "name": "Takato",
+        "icon": "tamers/passives/PassiveTakato.png",
+        "description": "Increases the bond bonus between Tamer and Digimon, slightly raising all stats."
+      },
+      {
+        "name": "Valor",
+        "icon": "tamers/passives/valor.png",
+        "description": "Permanently increases the team's ATK by a small amount."
+      }
+    ]
+  }
+]

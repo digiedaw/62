@@ -1,0 +1,162 @@
+﻿---
+/**
+ * TamerList - two-panel Tamer browser.
+ * Top: horizontally scrollable list of Tamer thumbnails (clickable).
+ * Bottom: detail panel of the currently selected Tamer (image, name,
+ *         role, overview, active + passive skill with icon).
+ */
+import tamers from "../data/tamers.json";
+
+interface Props {
+  initial?: string;
+}
+const { initial } = Astro.props;
+const selected = (initial && tamers.find((t) => t.slug === initial)) ?? tamers[0];
+---
+<section class="tamer-component" data-tamer-list>
+  <div class="tamer-rail" role="tablist" aria-label="Tamer list">
+    {tamers.map((t) => (
+      <button type="button" role="tab" class={`tamer-chip${t.slug === selected.slug ? " is-active" : ""}`} data-slug={t.slug} aria-selected={t.slug === selected.slug ? "true" : "false"}>
+        <span class="tamer-chip-art" aria-hidden="true">{t.image ? <img src={`/${t.image}`} alt="" loading="lazy" /> : <span class="tamer-chip-emoji">{t.emoji}</span>}</span>
+        <span class="tamer-chip-name">{t.name}</span>
+      </button>
+    ))}
+  </div>
+  <div class="tamer-detail panel" data-tamer-detail>
+    <div class="tamer-detail-grid">
+      <div class="tamer-portrait">
+        {selected.image ? <img src={`/${selected.image}`} alt={selected.name} /> : <span class="tamer-portrait-emoji" aria-hidden="true">{selected.emoji}</span>}
+      </div>
+      <div class="tamer-info">
+        <h3 class="tamer-name">{selected.name}</h3>
+        <span class="badge accent role-tag">{selected.role}</span>
+        <p class="tamer-tagline muted">{selected.tagline}</p>
+        <div class="tamer-block"><h4>Overview</h4><p set:html={selected.overview}></p></div>
+        <div class="tamer-skills">
+          <div class="tamer-skill">
+            <div class="tamer-skill-icon" aria-hidden="true">{selected.activeSkill.icon ? <img src={`/${selected.activeSkill.icon}`} alt="" /> : <span>⚔️</span>}</div>
+            <div class="tamer-skill-body">
+              <div class="tamer-skill-name"><span class="badge">Active</span><strong>{selected.activeSkill.name}</strong></div>
+              <p>{selected.activeSkill.description}</p>
+            </div>
+          </div>
+          <div class="tamer-skill">
+            <div class="tamer-skill-icon" aria-hidden="true">{selected.passiveSkill.icon ? <img src={`/${selected.passiveSkill.icon}`} alt="" /> : <span>🛡️</span>}</div>
+            <div class="tamer-skill-body">
+              <div class="tamer-skill-name"><span class="badge">Passive</span><strong>{selected.passiveSkill.name}</strong></div>
+              <p>{selected.passiveSkill.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script is:inline define:vars={{ TamerData: tamers }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    var root = document.querySelector("[data-tamer-list]");
+    if (!root) return;
+    var bySlug = {};
+    for (var i = 0; i < TamerData.length; i++) bySlug[TamerData[i].slug] = TamerData[i];
+    var rail = root.querySelector(".tamer-rail");
+    var detail = root.querySelector("[data-tamer-detail]");
+    if (!rail || !detail) return;
+    function pick(slug) {
+      var t = bySlug[slug];
+      if (!t) return;
+      var chips = rail.querySelectorAll(".tamer-chip");
+      for (var j = 0; j < chips.length; j++) {
+        var on = chips[j].getAttribute("data-slug") === slug;
+        chips[j].classList.toggle("is-active", on);
+        chips[j].setAttribute("aria-selected", on ? "true" : "false");
+      }
+      var portrait = detail.querySelector(".tamer-portrait");
+      var oldEmoji = portrait.querySelector(".tamer-portrait-emoji");
+      var oldImg = portrait.querySelector("img");
+      if (oldImg && oldImg.parentNode) oldImg.parentNode.removeChild(oldImg);
+      if (oldEmoji && oldEmoji.parentNode) oldEmoji.parentNode.removeChild(oldEmoji);
+      if (t.image) {
+        var img = document.createElement("img");
+        img.src = "/" + t.image;
+        img.alt = t.name;
+        portrait.insertBefore(img, portrait.firstChild);
+      } else {
+        var e = document.createElement("span");
+        e.className = "tamer-portrait-emoji";
+        e.setAttribute("aria-hidden", "true");
+        e.textContent = t.emoji;
+        portrait.insertBefore(e, portrait.firstChild);
+      }
+      detail.querySelector(".tamer-name").textContent = t.name;
+      var infoRole = detail.querySelector(".tamer-info .role-tag"); if (infoRole) infoRole.textContent = t.role;
+      detail.querySelector(".tamer-tagline").textContent = t.tagline;
+      
+      detail.querySelector(".tamer-block p").innerHTML = t.overview;
+      var skills = detail.querySelectorAll(".tamer-skill");
+      var data = [t.activeSkill, t.passiveSkill];
+      var defaults = ["⚔️", "🛡️"];
+      for (var k = 0; k < skills.length; k++) {
+        var d = data[k] || { name: "", icon: "", description: "" };
+        var slot = skills[k].querySelector(".tamer-skill-icon");
+        slot.innerHTML = "";
+        if (d.icon) {
+          var im = document.createElement("img");
+          im.src = "/" + d.icon;
+          im.alt = "";
+          slot.appendChild(im);
+        } else {
+          var sp = document.createElement("span");
+          sp.textContent = defaults[k] || "✨";
+          slot.appendChild(sp);
+        }
+        skills[k].querySelector(".tamer-skill-name strong").textContent = d.name;
+        skills[k].querySelector(".tamer-skill-body p").textContent = d.description;
+      }
+    }
+    var chips = rail.querySelectorAll(".tamer-chip");
+    for (var i2 = 0; i2 < chips.length; i2++) {
+      (function (slug) {
+        chips[i2].addEventListener("click", function (ev) {
+          ev.preventDefault();
+          pick(slug);
+        });
+      })(chips[i2].getAttribute("data-slug"));
+    }
+  });
+</script>
+
+
+<style>
+  .tamer-component { margin: 1.5rem 0 2.5rem; }
+  .tamer-rail { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0.25rem 0.75rem; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; scrollbar-width: thin; }
+  .tamer-rail::-webkit-scrollbar { height: 6px; }
+  .tamer-rail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .tamer-chip { flex: none; display: flex; flex-direction: column; align-items: center; gap: 0.35rem; width: 78px; padding: 0.5rem 0.4rem 0.55rem; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; color: var(--text); cursor: pointer; transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease; font: inherit; }
+  .tamer-chip:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); transform: translateY(-1px); }
+  .tamer-chip.is-active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--panel)); }
+  .tamer-chip-art { width: 64px; height: 64px; border-radius: 12px; background: var(--panel-2); display: flex; align-items: center; justify-content: center; padding: 2px; overflow: hidden; font-size: 1.4rem; } .tamer-chip-art img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  .tamer-chip-emoji { line-height: 1; }
+  .tamer-chip-name { font-size: 0.78rem; color: var(--muted); text-align: center; line-height: 1.2; }
+  .tamer-chip.is-active .tamer-chip-name { color: var(--accent); font-weight: 600; }
+  .tamer-detail { padding: 1.25rem 1.5rem; }
+  .tamer-detail-grid { display: grid; grid-template-columns: minmax(220px, 280px) 1fr; gap: 1.5rem; align-items: start; }
+  @media (max-width: 640px) { .tamer-detail-grid { grid-template-columns: 1fr; } }
+  .tamer-portrait { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--border); overflow: hidden; } .tamer-portrait img { display: block; max-width: 100%; height: auto; object-fit: contain; }
+  .tamer-portrait-emoji { font-size: 4.5rem; line-height: 1; }
+  .tamer-info .role-tag { display: inline-block; margin: 0 0 0.5rem; }
+  .tamer-info h3.tamer-name { margin: 0 0 0.25rem; font-size: 1.45rem; font-family: var(--font-body); color: var(--accent-2); border: none; padding: 0; }
+  .tamer-tagline { margin: 0 0 1rem; font-size: 0.9rem; }
+  .tamer-block { margin: 0 0 1.25rem; }
+  .tamer-block h4, .tamer-skills h4 { margin: 0 0 0.5rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-family: var(--font-mono); font-weight: 600; border: none; padding: 0; }
+  .tamer-block p { margin: 0; line-height: 1.6; font-size: 0.95rem; }
+  .tamer-block p :global(strong) { color: var(--accent-2); }
+  .tamer-skills { display: grid; gap: 0.75rem; }
+  .tamer-skill { display: grid; grid-template-columns: 52px 1fr; gap: 0.75rem; padding: 0.65rem 0.85rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; }
+  .tamer-skill-icon { width: 52px; height: 52px; border-radius: 10px; background: var(--panel); display: flex; align-items: center; justify-content: center; padding: 2px; font-size: 1.4rem; overflow: hidden; flex: none; } .tamer-skill-icon img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  .tamer-skill-name { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.2rem; font-size: 0.95rem; }
+  .tamer-skill-name strong { color: var(--accent-2); }
+  .tamer-skill-body p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
+</style>
+

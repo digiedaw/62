@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getAllCollectionNames } from '../lib/navigation';
+import { resolveIcon } from '../lib/icons';
+
+// One unified search index across EVERY collection (curated + auto folders).
+const baseOf = (name: string): string =>
+  name === 'digimon'
+    ? '/digimon/'
+    : name === 'accessories'
+      ? '/accessories/'
+      : `/${name}/`;
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const labelOf = (d: Record<string, any>): string =>
+  [d.category ?? d.stage ?? d.rank, d.owner].filter(Boolean).join(' · ') ||
+  'Page';
+
+const entries = (
+  await Promise.all(
+    getAllCollectionNames().map(async (name) => {
+      const items = await getCollection(
+        name as Parameters<typeof getCollection>[0]
+      );
+      return items
+        .sort(
+          (a, b) =>
+            ((a.data as Record<string, unknown>).order as number ?? 99) -
+            ((b.data as Record<string, unknown>).order as number ?? 99)
+        )
+        .map((entry) => {
+          const d = entry.data as Record<string, any>;
+          const tags = Array.isArray(d.tags) ? (d.tags as string[]) : [];
+          return {
+            href: baseOf(name) + entry.id + '/',
+            title: d.title as string,
+            emoji: (d.emoji as string) ?? '',
+            icon: resolveIcon({
+              collection: name,
+              slug: entry.id,
+              icon: d.icon as string | undefined,
+            }),
+            label: labelOf(d),
+            description: d.description as string,
+            hay: [
+              d.title,
+              d.description,
+              d.stage ?? '',
+              d.category ?? '',
+              d.rank ?? '',
+              d.role ?? '',
+              tags.join(' '),
+            ].join(' '),
+          };
+        });
+    })
+  )
+).flat();
+---
+
+<BaseLayout title="Search — DIGIWIKI" description="Instantly search every wiki entry.">
+  <div class="wrap">
+    <h1>Search</h1>
+    <p class="muted">
+      Instant search across digimon & accessories — {entries.length} items,
+      works offline, no server needed.
+    </p>
+
+    <input
+      id="q"
+      type="search"
+      placeholder='Type to filter… try "greymon" or "vaccine"'
+      autocomplete="off"
+      autofocus
+    />
+    <ul id="results"></ul>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ entries }}>
+  const input = document.getElementById('q');
+  const list = document.getElementById('results');
+
+  function render(items) {
+    list.innerHTML = '';
+    if (items.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'empty';
+      li.textContent = 'No results found. Try another term!';
+      list.appendChild(li);
+      return;
+    }
+    for (const item of items) {
+      const li = document.createElement('li');
+
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.textContent =
+        item.emoji +
+        ' ' +
+        item.title +
+        (item.label ? '  —  ' + item.label : '');
+
+      const desc = document.createElement('p');
+      desc.className = 'muted';
+      desc.textContent = item.description;
+
+      li.appendChild(link);
+      li.appendChild(desc);
+      list.appendChild(li);
+    }
+  }
+
+  function run() {
+    const query = input.value.trim().toLowerCase();
+    if (!query) return render(entries);
+    render(
+      entries.filter(function (entry) {
+        const haystack = entry.hay.toLowerCase();
+        return haystack.includes(query);
+      })
+    );
+  }
+
+  input.addEventListener('input', run);
+  run();
+</script>
+
+<style>
+  .wrap {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 2.5rem 0 4rem;
+  }
+  input {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0.8rem 1rem;
+    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(41, 241, 156, 0.15);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  li {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.85rem 1.1rem;
+  }
+  li a {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  li a:hover { color: var(--accent); }
+  li p {
+    margin: 0.3rem 0 0;
+    font-size: 0.88rem;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    border-style: dashed;
+  }
+</style>
